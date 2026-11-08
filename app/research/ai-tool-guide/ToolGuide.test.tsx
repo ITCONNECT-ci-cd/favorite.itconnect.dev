@@ -4,6 +4,19 @@ import { ToolGuide } from './ToolGuide';
 import { filterTools, originalTools, tools } from './catalog';
 
 describe('AI 도구 가이드', () => {
+  it('34개 카드 모두 기능·활용만 기본 표시하고 시작 방법은 제공하지 않는다', () => {
+    render(<ToolGuide />);
+    const cards = screen.getAllByRole('article');
+    expect(cards).toHaveLength(34);
+    for (const card of cards) {
+      expect(within(card).getByText('기능과 역할')).toBeInTheDocument();
+      expect(within(card).getByText('우리 업무 활용')).toBeInTheDocument();
+      expect(within(card).queryByText(/이렇게 시작|시작 방법/)).not.toBeInTheDocument();
+    }
+    expect(screen.queryByText(/첫 단계|어떻게 시작/)).not.toBeInTheDocument();
+    expect(filterTools('npx skills add', 'all')).toEqual([]);
+  });
+
   it('새 요청 8개와 기존 저장소 14개를 분리하고 우리 저장소는 제외한다', () => {
     expect(filterTools('', 'requested')).toHaveLength(8);
     expect(filterTools('', 'saved-repo')).toHaveLength(14);
@@ -16,7 +29,7 @@ describe('AI 도구 가이드', () => {
     }
   });
 
-  it('추가 자료와 기존 저장소의 첫 단계는 펼치지 않아도 보이며 CTA가 검색을 초기화한다', () => {
+  it('추가 자료와 기존 저장소의 기능·활용은 펼치지 않아도 보이며 CTA가 검색을 초기화한다', () => {
     render(<ToolGuide />);
     fireEvent.change(screen.getByRole('searchbox'), { target: { value: '없는도구' } });
     fireEvent.click(screen.getByRole('link', { name: '추가 요청 8개 보기 ↓' }));
@@ -24,7 +37,7 @@ describe('AI 도구 가이드', () => {
     expect(screen.getAllByRole('article')).toHaveLength(8);
     expect(screen.getByRole('button', { name: '추가 요청 8' })).toHaveAttribute('aria-pressed', 'true');
     const ontology = screen.getByRole('heading', { name: 'Auto Ontology MCP' }).closest('article')!;
-    expect(within(ontology).getByText(/Python 3.12/).closest('details')).toBeNull();
+    expect(within(ontology).getByText(/DB의 업무 용어/).closest('details')).toBeNull();
     expect(within(ontology).getByText('DB 비밀번호를 평문 저장합니다. 운영 DB 대신 합성 DB로 시험하세요.').closest('details')).toBeNull();
     fireEvent.click(screen.getByRole('link', { name: '기존 저장소 보기' }));
     expect(screen.getAllByRole('article')).toHaveLength(14);
@@ -45,10 +58,12 @@ describe('AI 도구 가이드', () => {
     expect(filterTools('Humanizer', 'design')).toEqual([]);
   });
 
-  it('모든 항목에 비용·설치·주의·검증 수준과 HTTPS 출처가 있다', () => {
+  it('모든 항목에 기능·활용·비용·주의·검증 수준과 HTTPS 출처가 있다', () => {
     for (const tool of tools) {
       expect(tool.cost.length).toBeGreaterThan(10);
-      expect(tool.setup.length).toBeGreaterThan(10);
+      expect(tool.summary.length).toBeGreaterThan(20);
+      expect(tool.useCase.length).toBeGreaterThan(20);
+      expect(tool).not.toHaveProperty('setup');
       expect(tool.caution.length).toBeGreaterThan(10);
       expect(tool.evidence.length).toBeGreaterThan(10);
       expect(tool.links.length).toBeGreaterThan(0);

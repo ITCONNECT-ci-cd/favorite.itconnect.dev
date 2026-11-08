@@ -28,8 +28,8 @@ export function ToolGuide() {
         <section className={styles.hero} aria-labelledby="guide-title">
           <div>
             <p className={styles.eyebrow}>ITCONNECT · TOOL GUIDE</p>
-            <h1 id="guide-title">무엇에 쓰고,<br />어떻게 시작할까요?</h1>
-            <p className={styles.intro}>즐겨찾기의 외부 GitHub 저장소와 새로 요청한 자료.<br className={styles.desktopBreak} /> 대표님 업무에서 쓸 곳과 첫 단계를 정리했습니다.</p>
+            <h1 id="guide-title">무엇을 하고,<br />어디에 쓸까요?</h1>
+            <p className={styles.intro}>즐겨찾기의 외부 GitHub 저장소와 새로 요청한 자료.<br className={styles.desktopBreak} /> 각 도구의 기능과 우리 업무에 쓸 곳을 정리했습니다.</p>
             <div className={styles.heroLinks}>
               <a href="#tool-catalog" className={styles.primaryLink} onClick={() => showGroup('requested')}>추가 요청 8개 보기 ↓</a>
               <a href="#tool-catalog" className={styles.secondaryLink} onClick={() => showGroup('saved-repo')}>기존 저장소 보기</a>
@@ -44,7 +44,7 @@ export function ToolGuide() {
         </section>
 
         <section id="tool-catalog" className={styles.section} aria-labelledby="catalog-title">
-          <div className={styles.sectionHeading}><div><p className={styles.eyebrow}>FIND YOUR TOOL</p><h2 id="catalog-title">필요한 일부터 찾아보세요</h2></div><p>무엇인지 → 내 업무 활용 → 시작 방법 순서입니다.</p></div>
+          <div className={styles.sectionHeading}><div><p className={styles.eyebrow}>FIND YOUR TOOL</p><h2 id="catalog-title">필요한 일부터 찾아보세요</h2></div><p>기능과 역할을 읽고, 우리 업무에서 쓸 곳을 비교하세요.</p></div>
           <div className={styles.filters}>
             <div className={styles.tabs} role="group" aria-label="도구 분류">
               {groups.map((item) => <button key={item.id} type="button" aria-pressed={group === item.id} onClick={() => setGroup(item.id)}>{item.name}{' '}<span>{item.count}</span></button>)}
@@ -57,10 +57,9 @@ export function ToolGuide() {
               <article key={tool.id} id={tool.id} className={styles.card}>
                 <div className={styles.cardMeta}><span>{GROUP_LABELS[tool.group]}</span><span>{tool.kind}</span></div>
                 <h3>{tool.name}</h3><p className={styles.role}>{tool.role}</p>
-                <p className={styles.description}>{tool.summary}</p>
                 <dl className={styles.practical}>
-                  <dt>내 업무에 쓰면</dt><dd>{tool.useCase}</dd>
-                  <dt>이렇게 시작</dt><dd>{tool.setup}</dd>
+                  <dt>기능과 역할</dt><dd>{tool.summary}</dd>
+                  <dt>우리 업무 활용</dt><dd>{tool.useCase}</dd>
                 </dl>
                 {tool.notice && <p className={styles.notice}>{tool.notice}</p>}
                 <details className={styles.details}>

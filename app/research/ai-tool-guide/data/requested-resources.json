@@ -1,10 +1,182 @@
 [
-{"id":"code-animation-prompts","name":"Code Animation Prompts","kind":"GitHub · 영상 스킬","role":"코드 애니메이션 스타일 선택","summary":"341종 스타일 프롬프트와 참고 이미지로 HTML 애니메이션의 연출을 잡는 스킬입니다.","useCase":"개념 설명 영상이나 서비스 오프닝에 맞는 화이트보드·입자·모션 스타일을 고릅니다.","setup":"스타일을 둘러본 뒤 Codex·Claude 중 하나에 연결하고 주제·길이·화면 비율을 지정합니다. MP4 출력에는 Playwright·Chromium·FFmpeg가 필요합니다.","cost":"스타일 탐색 무료. 에이전트 이용료 별도입니다.","caution":"전체 MIT가 아닙니다. 모음을 유료 강의·유료 스킬로 재포장해 판매할 수 없으며 항목별 권리를 확인해야 합니다.","notice":"이 모음 자체를 유료 강의·유료 스킬로 재포장해 판매하면 안 됩니다.","links":[{"label":"저장소·시작법","url":"https://github.com/XiaoyeCodes/code-animation-prompts"},{"label":"사용 제한","url":"https://github.com/XiaoyeCodes/code-animation-prompts/blob/main/LICENSE.md"}]},
-{"id":"treg","name":"treg","kind":"GitHub + 호스팅 서비스","role":"여러 API를 한곳에서 호출","summary":"검색·SEO·소셜·영상 등 여러 공급자의 도구를 하나의 토큰으로 찾아 호출합니다.","useCase":"내부 AX 실습에서 여러 도구를 연결하고 호출별 비용과 권한을 관리할 때 검토합니다.","setup":"공식 설치법을 검토하고 treg login → catalog search → catalog get 순서로 입력 조건·가격을 확인한 뒤 시험 호출합니다.","cost":"호스팅은 호출별 선불 과금. 본인 키 사용 시 원 공급자 요금 별도입니다.","caution":"조직 내부 사용은 허용합니다. 외부 hosted·managed·embedded 서비스 제공이나 판매 제품에 넣을 때는 사전 서면허가를 확인하세요. treg upload는 .env와 키를 보낼 수 있습니다.","notice":"외부 고객용 서비스에 넣으려면 사전 서면허가를 확인하세요.","links":[{"label":"저장소","url":"https://github.com/superdesigndev/treg"},{"label":"이용 조건","url":"https://github.com/superdesigndev/treg/blob/main/LICENSE"},{"label":"서비스","url":"https://treg.to"}]},
-{"id":"obsidian-skills","name":"Obsidian Skills","kind":"GitHub · 노트 스킬","role":"강의·업무 지식 정리","summary":"에이전트가 Obsidian 노트·목록·Canvas를 만들고 연결하도록 돕습니다.","useCase":"강의의 개념·실습·참고자료를 연결하고 프로젝트 요구사항과 결정 기록을 정리합니다.","setup":"복사한 테스트 vault를 준비합니다. npx skills add https://github.com/kepano/obsidian-skills에서 필요한 스킬만 골라 작은 노트 작업부터 시험합니다.","cost":"MIT. 에이전트와 Obsidian 유료 부가기능 요금은 별도입니다.","caution":"노트를 수정할 수 있으므로 vault·파일 경로를 명시하고 백업하세요. CLI 기능은 Obsidian 실행이 필요합니다.","links":[{"label":"저장소·설치법","url":"https://github.com/kepano/obsidian-skills"},{"label":"CLI 조건","url":"https://github.com/kepano/obsidian-skills/blob/main/skills/obsidian-cli/SKILL.md"}]},
-{"id":"corevisos-library","name":"COREVIS Library","kind":"웹사이트 · 자료 라이브러리","role":"UI·영상·모션·3D 자료 찾기","summary":"프롬프트·그림·영상·UI 코드·3D 자료를 찾는 한국어 라이브러리입니다. GitHub 저장소는 아닙니다.","useCase":"교육 설명 자료와 서비스 UI·홍보영상에 필요한 시각 자료를 빠르게 고릅니다.","setup":"가입 없이 항목과 라이선스를 먼저 확인하고 무료 자료로 시험합니다. AI가 직접 검색·다운로드하게 할 때만 MCP를 연결합니다.","cost":"무료 이용 가능. 월 라이트 7,000원·베이직 14,000원·프로 28,000원(VAT 포함). 코드 첫 받기는 보통 10크레딧입니다.","caution":"상업 결과물 사용은 가능하지만 자료집·다른 사이트로 모아 재배포하거나 AI 학습에 쓰면 안 됩니다. NVIDIA 3D는 CC BY 4.0 출처 표시가 필요합니다. 구독은 자동결제입니다.","links":[{"label":"라이브러리","url":"https://lib.corevisos.com/ko/"},{"label":"요금·MCP","url":"https://lib.corevisos.com/ko/card/"},{"label":"사용 범위","url":"https://lib.corevisos.com/ko/license/"}]},
-{"id":"find-skills","name":"find-skills","kind":"GitHub · 스킬 탐색 지침","role":"필요한 스킬 찾기","summary":"원하는 작업에 맞는 에이전트 스킬을 검색하고 설치 후보를 고르는 안내 스킬입니다.","useCase":"AX 실습이나 서비스 개발에 필요한 React·테스트·디자인·배포 스킬을 찾습니다.","setup":"skills.sh에서 찾거나 npx skills find react performance처럼 구체적으로 검색합니다. 원문·스크립트를 검토한 뒤 필요한 하나만 설치합니다. CLI는 Node.js 22.20+가 필요합니다.","cost":"CLI는 MIT. 찾은 스킬의 모델·API 사용료는 별도입니다.","caution":"설치 수와 별 수가 안전을 보장하지 않습니다. 외부 호출·파일 변경·라이선스를 확인하고 전역·무확인 설치를 피하세요.","links":[{"label":"find-skills 원문","url":"https://github.com/vercel-labs/skills/blob/main/skills/find-skills/SKILL.md"},{"label":"CLI 사용법","url":"https://github.com/vercel-labs/skills"},{"label":"스킬 검색","url":"https://skills.sh/"}]},
-{"id":"autorag","name":"AutoRAG","kind":"GitHub · 검색 에이전트 / RAG 평가","role":"문서 검색·RAG 구성 비교","summary":"현재 2.0은 개인 파일·메일·채팅 검색 에이전트입니다. 기존 RAG 최적화 도구는 legacy/로 이동했습니다.","useCase":"강의안 검색은 2.0 Lite로, AX 수업의 청킹·검색기 성능 비교는 legacy로 나눠 검토합니다.","setup":"문서 검색은 Node.js 24+의 @autorag/librarian에서 샘플 폴더만 지정해 Lite로 시험합니다. RAG 평가가 목적이면 legacy 안내와 QA·문서 평가 데이터를 사용합니다.","cost":"엔진·legacy는 Apache-2.0. 답변 모델·실행 자원 비용 별도이며 데스크톱 앱은 별도 FSL 라이선스입니다.","caution":"로컬 임베딩이어도 답변 모델에 문서가 전송될 수 있습니다. 전체 에이전트에는 파일 수정 기능도 있어 읽기전용 Lite부터 권합니다.","notice":"문서 검색은 현재 2.0, 예전 RAG 자동 최적화는 legacy를 보세요.","links":[{"label":"현재 AutoRAG 2.0","url":"https://github.com/Marker-Inc-Korea/AutoRAG"},{"label":"기존 RAG 평가","url":"https://github.com/Marker-Inc-Korea/AutoRAG/blob/main/legacy/README.md"},{"label":"Lite 시작법","url":"https://github.com/Marker-Inc-Korea/AutoRAG/blob/main/skills/autorag-lite-setup/SKILL.md"}]},
-{"id":"rea-video","name":"rea-video","kind":"GitHub · 영상 분석 스킬","role":"레퍼런스 영상 분석","summary":"영상을 샷별로 나눠 컷·자막·오디오를 분석하고 촬영·AI 생성·코드 제작 계획을 만듭니다.","useCase":"영상 수업과 서비스 데모에서 촬영할 부분, 생성할 부분, 모션그래픽으로 만들 부분을 나눕니다.","setup":"Python 3.10+·FFmpeg와 권리가 있는 짧은 영상을 준비합니다. rea-video decompose ref.mp4 -o out/ref 실행 후 report.html을 검토합니다.","cost":"Apache-2.0. 로컬 분석 무료, VLM·영상 생성 모델 비용은 별도입니다.","caution":"완성 영상을 자동 생성하는 도구가 아니며 AI 생성 판별도 확정 증거가 아닙니다. 원본·음악·인물 권리를 확보하세요. 보고서 언어는 현재 중국어·영어입니다.","links":[{"label":"저장소·예시","url":"https://github.com/JuneYaooo/rea-video"},{"label":"시작법","url":"https://github.com/JuneYaooo/rea-video/blob/main/docs/cli.md"}]},
-{"id":"auto-ontology-mcp","name":"Auto Ontology MCP","kind":"GitHub · DB·지식베이스 MCP","role":"업무 용어·SQL 검증","summary":"DB 용어·관계·조인 규칙을 만들고 SQL을 검증하며 문서 지식을 출처와 함께 저장합니다.","useCase":"AX 수업에서 같은 매출 질문도 정의와 조인에 따라 결과가 달라지는 과정을 합성 DB로 설명합니다.","setup":"Python 3.12+·uv 환경에서 공식 demo의 합성 DB를 준비합니다. MCP 클라이언트에 연결하고 용어·조인을 검토한 뒤 질문을 시험합니다.","cost":"Apache-2.0. 별도 LLM API 키가 없어도 연결 클라이언트의 모델 요금은 남습니다.","caution":"DB 비밀번호가 로컬 ontology.db에 평문 저장됩니다. 전용 읽기전용 계정만 쓰고 운영 DB 연결은 미루세요. 생성된 지식·위키는 쓰기 작업입니다. 신생 저장소라 샘플 PoC부터 권합니다.","notice":"DB 비밀번호를 평문 저장합니다. 운영 DB 대신 합성 DB로 시험하세요.","links":[{"label":"저장소·데모","url":"https://github.com/gogoymh/auto-ontology-mcp"},{"label":"보안 주의","url":"https://github.com/gogoymh/auto-ontology-mcp#safety"}]}
+  {
+    "id": "code-animation-prompts",
+    "name": "Code Animation Prompts",
+    "kind": "GitHub · 영상 스킬",
+    "role": "코드 애니메이션 연출",
+    "summary": "화이트보드·입자·모션 등 영상 스타일을 고르고, AI가 HTML 애니메이션을 만들도록 돕는 프롬프트 모음입니다.",
+    "useCase": "교육 개념을 움직이는 그림으로 설명하거나 서비스 소개 영상의 화면 연출을 잡을 때 좋습니다.",
+    "cost": "스타일 탐색 무료. 에이전트 이용료 별도입니다.",
+    "caution": "전체 MIT가 아닙니다. 모음을 유료 강의·유료 스킬로 재포장해 판매할 수 없으며 항목별 권리를 확인해야 합니다.",
+    "notice": "이 모음 자체를 유료 강의·유료 스킬로 재포장해 판매하면 안 됩니다.",
+    "links": [
+      {
+        "label": "공식 저장소",
+        "url": "https://github.com/XiaoyeCodes/code-animation-prompts"
+      },
+      {
+        "label": "사용 제한",
+        "url": "https://github.com/XiaoyeCodes/code-animation-prompts/blob/main/LICENSE.md"
+      }
+    ]
+  },
+  {
+    "id": "treg",
+    "name": "treg",
+    "kind": "GitHub + 호스팅 서비스",
+    "role": "여러 API의 연결·관리",
+    "summary": "검색·SEO·소셜·영상 도구의 API를 한곳에서 찾고 호출하며, 사용 권한과 비용 기록을 관리합니다.",
+    "useCase": "내부 리서치·마케팅 자동화에서 여러 도구를 연결하고 어떤 호출에 비용이 드는지 관리할 때 검토합니다.",
+    "cost": "호스팅은 호출별 선불 과금. 본인 키 사용 시 원 공급자 요금 별도입니다.",
+    "caution": "조직 내부 사용은 허용합니다. 외부 hosted·managed·embedded 서비스 제공이나 판매 제품에 넣을 때는 사전 서면허가를 확인하세요. treg upload는 .env와 키를 보낼 수 있습니다.",
+    "notice": "외부 고객용 서비스에 넣으려면 사전 서면허가를 확인하세요.",
+    "links": [
+      {
+        "label": "저장소",
+        "url": "https://github.com/superdesigndev/treg"
+      },
+      {
+        "label": "이용 조건",
+        "url": "https://github.com/superdesigndev/treg/blob/main/LICENSE"
+      },
+      {
+        "label": "서비스",
+        "url": "https://treg.to"
+      }
+    ]
+  },
+  {
+    "id": "obsidian-skills",
+    "name": "Obsidian Skills",
+    "kind": "GitHub · 노트 스킬",
+    "role": "노트·지식의 구조화",
+    "summary": "AI가 Obsidian 노트를 작성·수정하고, 목록과 관계도를 만들어 흩어진 지식을 연결하도록 돕는 스킬 모음입니다.",
+    "useCase": "강의의 개념·실습·참고자료를 묶거나, 프로젝트 요구사항과 의사결정 기록을 서로 연결할 때 좋습니다.",
+    "cost": "MIT. 에이전트와 Obsidian 유료 부가기능 요금은 별도입니다.",
+    "caution": "노트를 수정할 수 있으므로 vault·파일 경로를 명시하고 백업하세요. CLI 기능은 Obsidian 실행이 필요합니다.",
+    "links": [
+      {
+        "label": "공식 저장소",
+        "url": "https://github.com/kepano/obsidian-skills"
+      },
+      {
+        "label": "CLI 조건",
+        "url": "https://github.com/kepano/obsidian-skills/blob/main/skills/obsidian-cli/SKILL.md"
+      }
+    ]
+  },
+  {
+    "id": "corevisos-library",
+    "name": "COREVIS Library",
+    "kind": "웹사이트 · 자료 라이브러리",
+    "role": "시각 자료·UI 코드 탐색",
+    "summary": "이미지·영상·모션·UI 코드·3D 자료와 프롬프트를 찾는 한국어 라이브러리입니다. GitHub 저장소가 아닌 웹 서비스입니다.",
+    "useCase": "교육자료의 시각 예시, 서비스 화면의 UI 참고안, 홍보영상에 쓸 그래픽 소재를 찾을 때 활용합니다.",
+    "cost": "무료 이용 가능. 월 라이트 7,000원·베이직 14,000원·프로 28,000원(VAT 포함). 코드 첫 받기는 보통 10크레딧입니다.",
+    "caution": "상업 결과물 사용은 가능하지만 자료집·다른 사이트로 모아 재배포하거나 AI 학습에 쓰면 안 됩니다. NVIDIA 3D는 CC BY 4.0 출처 표시가 필요합니다. 구독은 자동결제입니다.",
+    "links": [
+      {
+        "label": "라이브러리",
+        "url": "https://lib.corevisos.com/ko/"
+      },
+      {
+        "label": "요금·MCP",
+        "url": "https://lib.corevisos.com/ko/card/"
+      },
+      {
+        "label": "사용 범위",
+        "url": "https://lib.corevisos.com/ko/license/"
+      }
+    ]
+  },
+  {
+    "id": "find-skills",
+    "name": "find-skills",
+    "kind": "GitHub · 스킬 탐색 지침",
+    "role": "작업에 맞는 스킬 탐색",
+    "summary": "원하는 작업을 설명하면 관련 에이전트 스킬의 후보·역할·출처를 찾아주는 안내 스킬입니다.",
+    "useCase": "React 개발, 테스트, 디자인, 배포 등 필요한 역량을 기존 스킬로 보완할 수 있는지 찾아볼 때 좋습니다.",
+    "cost": "CLI는 MIT. 찾은 스킬의 모델·API 사용료는 별도입니다.",
+    "caution": "설치 수와 별 수가 안전을 보장하지 않습니다. 외부 호출·파일 변경·라이선스를 확인하고 전역·무확인 설치를 피하세요.",
+    "links": [
+      {
+        "label": "find-skills 원문",
+        "url": "https://github.com/vercel-labs/skills/blob/main/skills/find-skills/SKILL.md"
+      },
+      {
+        "label": "CLI 사용법",
+        "url": "https://github.com/vercel-labs/skills"
+      },
+      {
+        "label": "스킬 검색",
+        "url": "https://skills.sh/"
+      }
+    ]
+  },
+  {
+    "id": "autorag",
+    "name": "AutoRAG",
+    "kind": "GitHub · 검색 에이전트 / RAG 평가",
+    "role": "문서 검색·검색 품질 평가",
+    "summary": "현재 2.0은 개인 파일·메일·채팅에서 근거를 찾아 답하는 검색 에이전트입니다. 기존 RAG 구성 평가·최적화 기능은 legacy에 있습니다.",
+    "useCase": "강의안·업무자료 질의응답에는 2.0을, AX 수업에서 문서 분할 방식과 검색기 성능을 비교할 때는 legacy를 검토합니다.",
+    "cost": "엔진·legacy는 Apache-2.0. 답변 모델·실행 자원 비용 별도이며 데스크톱 앱은 별도 FSL 라이선스입니다.",
+    "caution": "로컬 임베딩이어도 답변 모델에 문서가 전송될 수 있습니다. 전체 에이전트에는 파일 수정 기능도 있어 읽기전용 Lite부터 권합니다.",
+    "notice": "문서 검색은 현재 2.0, 예전 RAG 자동 최적화는 legacy를 보세요.",
+    "links": [
+      {
+        "label": "현재 AutoRAG 2.0",
+        "url": "https://github.com/Marker-Inc-Korea/AutoRAG"
+      },
+      {
+        "label": "기존 RAG 평가",
+        "url": "https://github.com/Marker-Inc-Korea/AutoRAG/blob/main/legacy/README.md"
+      },
+      {
+        "label": "공식 문서",
+        "url": "https://github.com/Marker-Inc-Korea/AutoRAG/blob/main/skills/autorag-lite-setup/SKILL.md"
+      }
+    ]
+  },
+  {
+    "id": "rea-video",
+    "name": "rea-video",
+    "kind": "GitHub · 영상 분석 스킬",
+    "role": "영상 구조·제작 방식 분석",
+    "summary": "레퍼런스 영상을 장면별로 나눠 컷·자막·오디오를 분석하고 촬영·AI 생성·모션그래픽 제작 계획으로 정리합니다.",
+    "useCase": "영상 수업이나 서비스 데모를 기획할 때 어떤 장면을 촬영하고 생성하고 코드로 만들지 나누는 데 좋습니다.",
+    "cost": "Apache-2.0. 로컬 분석 무료, VLM·영상 생성 모델 비용은 별도입니다.",
+    "caution": "완성 영상을 자동 생성하는 도구가 아니며 AI 생성 판별도 확정 증거가 아닙니다. 원본·음악·인물 권리를 확보하세요. 보고서 언어는 현재 중국어·영어입니다.",
+    "links": [
+      {
+        "label": "저장소·예시",
+        "url": "https://github.com/JuneYaooo/rea-video"
+      },
+      {
+        "label": "공식 문서",
+        "url": "https://github.com/JuneYaooo/rea-video/blob/main/docs/cli.md"
+      }
+    ]
+  },
+  {
+    "id": "auto-ontology-mcp",
+    "name": "Auto Ontology MCP",
+    "kind": "GitHub · DB·지식베이스 MCP",
+    "role": "업무 용어·SQL의 일관성 검증",
+    "summary": "DB의 업무 용어·테이블 관계·조인 규칙을 정리하고 SQL을 검증합니다. 문서 지식도 출처와 함께 저장하는 MCP 서버입니다.",
+    "useCase": "매출 같은 지표의 정의가 팀마다 다를 때 기준을 정리하거나, AX 수업에서 잘못된 조인이 결과를 바꾸는 사례를 설명합니다.",
+    "cost": "Apache-2.0. 별도 LLM API 키가 없어도 연결 클라이언트의 모델 요금은 남습니다.",
+    "caution": "DB 비밀번호가 로컬 ontology.db에 평문 저장됩니다. 전용 읽기전용 계정만 쓰고 운영 DB 연결은 미루세요. 생성된 지식·위키는 쓰기 작업입니다. 신생 저장소라 샘플 PoC부터 권합니다.",
+    "notice": "DB 비밀번호를 평문 저장합니다. 운영 DB 대신 합성 DB로 시험하세요.",
+    "links": [
+      {
+        "label": "저장소·데모",
+        "url": "https://github.com/gogoymh/auto-ontology-mcp"
+      },
+      {
+        "label": "보안 주의",
+        "url": "https://github.com/gogoymh/auto-ontology-mcp#safety"
+      }
+    ]
+  }
 ]
