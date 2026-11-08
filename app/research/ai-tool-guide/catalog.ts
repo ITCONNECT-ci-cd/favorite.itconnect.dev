@@ -1,4 +1,7 @@
-export type ToolGroup = 'design' | 'workflow';
+import { repositoryTools } from './repository-catalog';
+
+export type ToolGroup = 'design' | 'workflow' | 'saved-repo' | 'requested';
+export const GROUP_LABELS: Record<ToolGroup, string> = { design: '디자인 도구', workflow: '업무 확장', 'saved-repo': '기존 저장소', requested: '추가 요청' };
 export type ToolEntry = {
   id: string;
   name: string;
@@ -12,12 +15,13 @@ export type ToolEntry = {
   setup: string;
   caution: string;
   evidence: string;
+  notice?: string;
   links: { label: string; url: string }[];
 };
 
 export const REVIEWED_AT = '2026-11-08';
 export const GUIDE_PATH = '/info';
-export const tools: ToolEntry[] = [
+export const originalTools: ToolEntry[] = [
   {
     id: 'taste-skill', name: 'TasteSkill', group: 'design', kind: '코딩 에이전트 스킬', role: '뻔한 화면에서 벗어나기',
     summary: 'AI가 웹페이지를 만들 때 구성·서체·색상·사진을 고르는 방향과 브라우저 점검 기준을 제공합니다. 독립형 디자인 서비스가 아니라 코딩 에이전트가 읽는 작업 지침입니다.',
@@ -152,10 +156,12 @@ export const tools: ToolEntry[] = [
   },
 ];
 
+export const tools: ToolEntry[] = [...repositoryTools, ...originalTools];
+
 export function filterTools(query: string, group: ToolGroup | 'all'): ToolEntry[] {
   const terms = query.trim().toLocaleLowerCase('ko-KR').split(/\s+/).filter(Boolean);
   return tools.filter((tool) => (group === 'all' || tool.group === group) && terms.every((term) =>
-    [tool.name, tool.kind, tool.role, tool.summary, tool.output, tool.useCase, tool.cost, tool.setup, tool.caution]
+    [tool.name, tool.kind, tool.role, tool.summary, tool.output, tool.useCase, tool.cost, tool.setup, tool.caution, tool.notice ?? '', ...tool.links.map((link) => link.url)]
       .join(' ').toLocaleLowerCase('ko-KR').includes(term),
   ));
 }

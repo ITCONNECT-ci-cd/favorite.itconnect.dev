@@ -1,14 +1,41 @@
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { ToolGuide } from './ToolGuide';
-import { filterTools, tools } from './catalog';
+import { filterTools, originalTools, tools } from './catalog';
 
 describe('AI 도구 가이드', () => {
+  it('새 요청 8개와 기존 저장소 14개를 분리하고 우리 저장소는 제외한다', () => {
+    expect(filterTools('', 'requested')).toHaveLength(8);
+    expect(filterTools('', 'saved-repo')).toHaveLength(14);
+    expect(tools.flatMap((tool) => tool.links).some((link) => /github\.com\/ITCONNECT-ci-cd\//i.test(link.url))).toBe(false);
+    const firstLinks = tools.filter((tool) => ['requested', 'saved-repo'].includes(tool.group)).map((tool) => tool.links[0].url.toLowerCase().replace(/\/$/, ''));
+    expect(new Set(firstLinks).size).toBe(22);
+    expect(tools.find((tool) => tool.id === 'corevisos-library')?.kind).toContain('웹사이트');
+    for (const id of ['treg', 'code-animation-prompts', 'autorag', 'auto-ontology-mcp']) {
+      expect(tools.find((tool) => tool.id === id)?.notice?.length).toBeGreaterThan(15);
+    }
+  });
+
+  it('추가 자료와 기존 저장소의 첫 단계는 펼치지 않아도 보이며 CTA가 검색을 초기화한다', () => {
+    render(<ToolGuide />);
+    fireEvent.change(screen.getByRole('searchbox'), { target: { value: '없는도구' } });
+    fireEvent.click(screen.getByRole('link', { name: '추가 요청 8개 보기 ↓' }));
+    expect(screen.getByRole('searchbox')).toHaveValue('');
+    expect(screen.getAllByRole('article')).toHaveLength(8);
+    expect(screen.getByRole('button', { name: '추가 요청 8' })).toHaveAttribute('aria-pressed', 'true');
+    const ontology = screen.getByRole('heading', { name: 'Auto Ontology MCP' }).closest('article')!;
+    expect(within(ontology).getByText(/Python 3.12/).closest('details')).toBeNull();
+    expect(within(ontology).getByText('DB 비밀번호를 평문 저장합니다. 운영 DB 대신 합성 DB로 시험하세요.').closest('details')).toBeNull();
+    fireEvent.click(screen.getByRole('link', { name: '기존 저장소 보기' }));
+    expect(screen.getAllByRole('article')).toHaveLength(14);
+  });
+
   it('디자인 5개와 앞선 업무 확장 7개를 구분한다', () => {
-    expect(tools).toHaveLength(12);
+    expect(originalTools).toHaveLength(12);
+    expect(tools).toHaveLength(34);
     expect(filterTools('', 'design')).toHaveLength(5);
     expect(filterTools('', 'workflow')).toHaveLength(7);
-    expect(new Set(tools.map((tool) => tool.id)).size).toBe(12);
+    expect(new Set(tools.map((tool) => tool.id)).size).toBe(34);
   });
 
   it('검색은 대소문자·앞뒤 공백을 무시하고 이름·용도·주의사항을 포함한다', () => {
@@ -44,7 +71,7 @@ describe('AI 도구 가이드', () => {
 
   it('필터·검색·초기화를 반복해도 올바른 목록을 보여준다', () => {
     render(<ToolGuide />);
-    expect(screen.getByRole('status')).toHaveTextContent('12개 항목');
+    expect(screen.getByRole('status')).toHaveTextContent('34개 항목');
     fireEvent.click(screen.getByRole('button', { name: '업무 확장 7' }));
     expect(screen.getByRole('status')).toHaveTextContent('7개 항목');
     fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'humanizer' } });
@@ -54,8 +81,8 @@ describe('AI 도구 가이드', () => {
     expect(screen.queryAllByRole('article')).toHaveLength(0);
     fireEvent.click(screen.getByRole('button', { name: '검색·분류 초기화' }));
     expect(screen.getByRole('searchbox')).toHaveValue('');
-    expect(screen.getAllByRole('article')).toHaveLength(12);
-    expect(screen.getByRole('button', { name: '전체 12' })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getAllByRole('article')).toHaveLength(34);
+    expect(screen.getByRole('button', { name: '전체 34' })).toHaveAttribute('aria-pressed', 'true');
   });
 
   it('빠른 비교 링크는 필터를 초기화해 대상 카드가 사라지지 않게 한다', () => {
