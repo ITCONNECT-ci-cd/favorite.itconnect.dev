@@ -2,12 +2,12 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { filterTools, GROUP_LABELS, REVIEWED_AT, tools, type ToolGroup } from './catalog';
+import { filterTools, GROUP_LABELS, GROUP_ORDER, originalTools, REVIEWED_AT, tools, type ToolGroup } from './catalog';
 import styles from './page.module.css';
 
 const groups = [
   { id: 'all', name: '전체', count: tools.length },
-  ...(['requested', 'saved-repo', 'design', 'workflow'] as const).map((id) => ({ id, name: GROUP_LABELS[id], count: tools.filter((tool) => tool.group === id).length })),
+  ...GROUP_ORDER.map((id) => ({ id, name: GROUP_LABELS[id], count: tools.filter((tool) => tool.group === id).length })),
 ] as const;
 
 export function ToolGuide() {
@@ -29,38 +29,42 @@ export function ToolGuide() {
           <div>
             <p className={styles.eyebrow}>ITCONNECT · TOOL GUIDE</p>
             <h1 id="guide-title">무엇을 하고,<br />어디에 쓸까요?</h1>
-            <p className={styles.intro}>즐겨찾기의 외부 GitHub 저장소와 새로 요청한 자료.<br className={styles.desktopBreak} /> 각 도구의 기능과 우리 업무에 쓸 곳을 정리했습니다.</p>
+            <p className={styles.intro}>디자인부터 개발, 업무 자동화까지.<br className={styles.desktopBreak} /> 기능별로 모아 보고, 우리 업무에 쓸 곳을 비교하세요.</p>
             <div className={styles.heroLinks}>
-              <a href="#tool-catalog" className={styles.primaryLink} onClick={() => showGroup('requested')}>추가 요청 8개 보기 ↓</a>
-              <a href="#tool-catalog" className={styles.secondaryLink} onClick={() => showGroup('saved-repo')}>기존 저장소 보기</a>
+              <a href="#tool-catalog" className={styles.primaryLink} onClick={reset}>전체 도구 보기 ↓</a>
+              <a href="#tool-catalog" className={styles.secondaryLink} onClick={() => showGroup('development')}>개발 도구 보기</a>
               <a href="#quick-compare" className={styles.secondaryLink}>디자인 5개 비교</a>
             </div>
           </div>
           <aside className={styles.heroAside} aria-label="가이드 범위">
-            <div><strong>{tools.filter((tool) => tool.group === 'saved-repo').length}</strong><span>즐겨찾기의<br />외부 저장소</span></div>
-            <div><strong>08</strong><span>추가 요청 자료<br />GitHub 7개 · 웹사이트 1개</span></div>
-            <p><time dateTime={REVIEWED_AT}>{REVIEWED_AT.replaceAll('-', '.')}</time> 확인 · 우리 프로젝트 제외<br />기존 디자인·업무 가이드도 함께 볼 수 있습니다.</p>
+            <div><strong>{tools.length}</strong><span>도구와 자료<br />기능·활용 한눈에</span></div>
+            <div><strong>0{GROUP_ORDER.length}</strong><span>기능 카테고리<br />필요한 업무별로 탐색</span></div>
+            <p><time dateTime={REVIEWED_AT}>{REVIEWED_AT.replaceAll('-', '.')}</time> 확인 · 우리 프로젝트 제외<br />각 도구의 주된 기능을 기준으로 분류했습니다.</p>
           </aside>
         </section>
 
         <section id="tool-catalog" className={styles.section} aria-labelledby="catalog-title">
           <div className={styles.sectionHeading}><div><p className={styles.eyebrow}>FIND YOUR TOOL</p><h2 id="catalog-title">필요한 일부터 찾아보세요</h2></div><p>기능과 역할을 읽고, 우리 업무에서 쓸 곳을 비교하세요.</p></div>
           <div className={styles.filters}>
-            <div className={styles.tabs} role="group" aria-label="도구 분류">
+            <div className={styles.tabs} role="group" aria-label="기능 카테고리">
               {groups.map((item) => <button key={item.id} type="button" aria-pressed={group === item.id} onClick={() => setGroup(item.id)}>{item.name}{' '}<span>{item.count}</span></button>)}
             </div>
             <div className={styles.searchWrap}><label htmlFor="tool-search" className={styles.srOnly}>도구 이름·용도 검색</label><input id="tool-search" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="이름·사용처 검색 (예: 영상, 제안서)" autoComplete="off" /></div>
           </div>
-          <p className={styles.resultCount} role="status" aria-live="polite">{results.length}개 항목{query.trim() ? ` · “${query.trim()}” 검색 결과` : ''}</p>
+          <p className={styles.resultCount} role="status" aria-live="polite">{group === 'all' ? '전체' : GROUP_LABELS[group]} · {results.length}개 항목{query.trim() ? ` · “${query.trim()}” 검색 결과` : ''}</p>
           {results.length === 0 ? <div className={styles.empty}><h3>일치하는 도구가 없습니다</h3><p>검색어를 줄이거나 다른 분류에서 찾아보세요.</p><button type="button" onClick={reset}>검색·분류 초기화</button></div> : <div className={styles.cards}>
             {results.map((tool) => (
               <article key={tool.id} id={tool.id} className={styles.card}>
-                <div className={styles.cardMeta}><span>{GROUP_LABELS[tool.group]}</span><span>{tool.kind}</span></div>
-                <h3>{tool.name}</h3><p className={styles.role}>{tool.role}</p>
-                <dl className={styles.practical}>
-                  <dt>기능과 역할</dt><dd>{tool.summary}</dd>
-                  <dt>우리 업무 활용</dt><dd>{tool.useCase}</dd>
-                </dl>
+                <div className={styles.cardMain}>
+                  <div className={styles.identity}>
+                    <div className={styles.cardMeta}><span>{GROUP_LABELS[tool.group]}</span><span>{tool.kind}</span></div>
+                    <h3>{tool.name}</h3><p className={styles.role}>{tool.role}</p>
+                  </div>
+                  <dl className={styles.practical}>
+                    <div><dt>기능과 역할</dt><dd>{tool.summary}</dd></div>
+                    <div><dt>우리 업무 활용</dt><dd>{tool.useCase}</dd></div>
+                  </dl>
+                </div>
                 {tool.notice && <p className={styles.notice}>{tool.notice}</p>}
                 <details className={styles.details}>
                   <summary>비용·주의사항 보기 <span aria-hidden="true">+</span></summary>
@@ -77,7 +81,7 @@ export function ToolGuide() {
           <div className={styles.sectionHeading}><div><p className={styles.eyebrow}>DESIGN QUICK COMPARE</p><h2 id="compare-title">디자인 도구는 이렇게 나뉩니다</h2></div><p>기준을 정하고 → 만들고 → 검수하세요.</p></div>
           <div className={styles.compare}>
             <div className={styles.compareHeader} aria-hidden="true"><span>도구</span><span>맡길 일</span><span>얻는 결과</span><span>상세</span></div>
-            {tools.filter((tool) => tool.group === 'design').map((tool, index) => (
+            {originalTools.filter((tool) => tool.group === 'design').map((tool, index) => (
               <a key={tool.id} href={`#${tool.id}`} aria-label={`${tool.name} 상세 보기`} className={styles.compareRow} onClick={reset}>
                 <span className={styles.compareName}><span className={styles.number}>0{index + 1}</span><strong>{tool.name}</strong></span>
                 <span className={styles.compareRole}>{tool.role}</span><span className={styles.compareOutput}>{tool.output}</span><span className={styles.arrow} aria-hidden="true">↗</span>

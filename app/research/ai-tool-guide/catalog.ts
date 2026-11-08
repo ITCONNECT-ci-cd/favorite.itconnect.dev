@@ -1,7 +1,11 @@
 import { repositoryTools } from './repository-catalog';
 
-export type ToolGroup = 'design' | 'workflow' | 'saved-repo' | 'requested';
-export const GROUP_LABELS: Record<ToolGroup, string> = { design: '디자인 도구', workflow: '업무 확장', 'saved-repo': '기존 저장소', requested: '추가 요청' };
+export const GROUP_ORDER = ['design', 'development', 'planning', 'media', 'knowledge', 'automation'] as const;
+export type ToolGroup = typeof GROUP_ORDER[number];
+export const GROUP_LABELS: Record<ToolGroup, string> = {
+  design: '디자인', development: '개발', planning: '기획·문서',
+  media: '영상·음성', knowledge: '지식·데이터', automation: '업무 자동화',
+};
 export type ToolEntry = {
   id: string;
   name: string;
@@ -72,7 +76,7 @@ export const originalTools: ToolEntry[] = [
     links: [{ label: '공식 저장소', url: 'https://github.com/bergside/design-md-chrome' }, { label: '공식 Chrome Web Store', url: 'https://chromewebstore.google.com/detail/designmd-style-extractor/ogpdnchdjiibhobphelbbkemnnemkfma' }, { label: '요청 권한 확인', url: 'https://github.com/bergside/design-md-chrome/blob/main/manifest.json' }],
   },
   {
-    id: 'wondelai-skills', name: 'wondelai/skills', group: 'workflow', kind: '전문 지식 스킬 모음', role: '전문 프레임워크 재사용',
+    id: 'wondelai-skills', name: 'wondelai/skills', group: 'planning', kind: '전문 지식 스킬 모음', role: '전문 프레임워크 재사용',
     summary: '서적과 공개 가이드의 사고법을 AI 작업 지침으로 재구성한 스킬 모음입니다. 조사 시점에 전문 스킬 51개와 메타 스킬 14개를 구분했습니다.',
     output: '업무별 분석·검토·기획 프레임워크',
     useCase: '교육·컨설팅에서 반복하는 분석·기획·검토의 기준을 정리하고, 고객 상황에 맞는 질문과 검토 틀을 만들 때 참고합니다.',
@@ -82,7 +86,7 @@ export const originalTools: ToolEntry[] = [
     links: [{ label: '공식 프로젝트 저장소', url: 'https://github.com/wondelai/skills' }],
   },
   {
-    id: 'agent-desktop', name: 'Vercel agent-desktop', group: 'workflow', kind: '데스크톱 자동화 도구', role: '데스크톱 앱 조작',
+    id: 'agent-desktop', name: 'Vercel agent-desktop', group: 'automation', kind: '데스크톱 자동화 도구', role: '데스크톱 앱 조작',
     summary: 'macOS·Windows·Linux 앱의 화면 구조를 읽고 클릭·입력을 수행하는 도구입니다. AI 모델이 아니라 기존 에이전트에 컴퓨터 조작 기능을 붙입니다.',
     output: '데스크톱 UI 읽기·클릭·입력',
     useCase: 'API가 없는 앱의 반복 입력과 파일 대화상자 처리를 자동화할 때 검토합니다. 웹 본문 조작은 관련 도구 Agent Browser로 나눌 수 있습니다.',
@@ -92,7 +96,7 @@ export const originalTools: ToolEntry[] = [
     links: [{ label: 'Vercel Labs 저장소', url: 'https://github.com/vercel-labs/agent-desktop' }, { label: '공식 데스크톱 문서', url: 'https://agent-browser.dev/desktop' }, { label: 'v1.2.0 릴리스', url: 'https://github.com/vercel-labs/agent-desktop/releases/tag/v1.2.0' }, { label: '관련 도구: Agent Browser', url: 'https://github.com/vercel-labs/agent-browser' }, { label: 'Agent Browser 공식 문서', url: 'https://agent-browser.dev' }],
   },
   {
-    id: 'prompt-master', name: 'Prompt Master', group: 'workflow', kind: '프롬프트 설계 자료', role: 'AI 요청의 구조화',
+    id: 'prompt-master', name: 'Prompt Master', group: 'planning', kind: '프롬프트 설계 자료', role: 'AI 요청의 구조화',
     summary: '목적·맥락·조건·출력 형식을 정리해 AI에 전달할 요청을 더 분명하게 만드는 프롬프트 설계 프로젝트입니다.',
     output: '더 구체적이고 재사용 가능한 프롬프트',
     useCase: '교육 실습 문제, 콘텐츠 제작, 제안서 분석처럼 반복하는 요청을 일정한 형식으로 정리하고 결과 품질을 비교할 때 씁니다.',
@@ -102,7 +106,7 @@ export const originalTools: ToolEntry[] = [
     links: [{ label: '소개 글이 연결한 저장소', url: 'https://github.com/nidhinjs/prompt-master' }],
   },
   {
-    id: 'humanizer', name: 'Humanizer', group: 'workflow', kind: '문체 교정 스킬', role: 'AI 문장의 문체 편집',
+    id: 'humanizer', name: 'Humanizer', group: 'planning', kind: '문체 교정 스킬', role: 'AI 문장의 문체 편집',
     summary: 'AI가 자주 쓰는 과장과 상투적 표현을 찾아 문장을 다듬는 스킬입니다. 주로 영어 문체를 다루며 한국어 품질은 별도 확인이 필요합니다.',
     output: '원래 의미를 살려 다듬은 문장',
     useCase: '영문 회사 소개문과 블로그 초안을 편집하거나, 문체만 다듬고 사실·수치·의미는 유지해야 하는 작업에 활용합니다.',
@@ -112,7 +116,7 @@ export const originalTools: ToolEntry[] = [
     links: [{ label: '소개 글이 연결한 저장소', url: 'https://github.com/blader/humanizer' }],
   },
   {
-    id: 'knowledge-work-plugins', name: '직무별 플러그인', group: 'workflow', kind: 'Claude 중심 업무 확장', role: '직무별 AI 업무 흐름',
+    id: 'knowledge-work-plugins', name: '직무별 플러그인', group: 'automation', kind: 'Claude 중심 업무 확장', role: '직무별 AI 업무 흐름',
     summary: 'Anthropic이 공개한 Claude 중심 플러그인 모음입니다. 직무별 지침·명령·도구 연결을 묶어 반복 업무를 돕습니다.',
     output: '직무별 지침·명령·업무 흐름',
     useCase: '직무별 AI 교육의 실습 사례를 구성하거나, 사내 업무 기준과 도구에 맞는 업무 보조 기능을 설계할 때 참고합니다.',
@@ -122,7 +126,7 @@ export const originalTools: ToolEntry[] = [
     links: [{ label: 'Anthropic 공식 저장소', url: 'https://github.com/anthropics/knowledge-work-plugins' }],
   },
   {
-    id: 'custom-skills', name: '나만의 스킬', group: 'workflow', kind: '재사용 가능한 작업 지침', role: '반복 업무의 기준 표준화',
+    id: 'custom-skills', name: '나만의 스킬', group: 'automation', kind: '재사용 가능한 작업 지침', role: '반복 업무의 기준 표준화',
     summary: '잘된 작업의 절차·판단 기준·출력 형식을 파일로 정리해 AI가 재사용하게 하는 방식입니다. 특정 제품 하나의 이름은 아닙니다.',
     output: '팀의 업무 기준을 담은 스킬',
     useCase: '교육안 구성, 제안서 검토, 브랜드 문체, 보고서 검수처럼 매번 같은 품질 기준이 필요한 업무에 활용합니다.',
@@ -132,7 +136,7 @@ export const originalTools: ToolEntry[] = [
     links: [{ label: '처음 소개한 공개 노션 자료', url: 'https://neat-product-c0f.notion.site/AI-5-GPT-40e19ffaaaf18156bd5ce52bb46b8a0a' }],
   },
   {
-    id: 'connectors', name: '커넥터', group: 'workflow', kind: '앱·데이터 연결 방식', role: 'AI와 업무 데이터 연결',
+    id: 'connectors', name: '커넥터', group: 'automation', kind: '앱·데이터 연결 방식', role: 'AI와 업무 데이터 연결',
     summary: 'AI가 메일·문서·협업 도구의 자료를 조회하거나 허용된 기능을 실행하도록 잇는 연결 방식입니다. 지원 기능과 권한은 서비스마다 다릅니다.',
     output: '허용된 앱 데이터 조회와 작업 실행',
     useCase: '여러 곳에 흩어진 교육·컨설팅 자료를 한 번에 찾고, 문서와 대화의 맥락을 묶어 확인해야 할 때 활용합니다.',
@@ -143,12 +147,14 @@ export const originalTools: ToolEntry[] = [
   },
 ];
 
-export const tools: ToolEntry[] = [...repositoryTools, ...originalTools];
+// 기능별로 모아 표시하되, 각 분류 안에서는 원래 순서를 유지한다.
+const allTools = [...originalTools, ...repositoryTools];
+export const tools: ToolEntry[] = GROUP_ORDER.flatMap((group) => allTools.filter((tool) => tool.group === group));
 
 export function filterTools(query: string, group: ToolGroup | 'all'): ToolEntry[] {
   const terms = query.trim().toLocaleLowerCase('ko-KR').split(/\s+/).filter(Boolean);
   return tools.filter((tool) => (group === 'all' || tool.group === group) && terms.every((term) =>
-    [tool.name, tool.kind, tool.role, tool.summary, tool.output, tool.useCase, tool.cost, tool.caution, tool.notice ?? '', ...tool.links.map((link) => link.url)]
+    [GROUP_LABELS[tool.group], tool.name, tool.kind, tool.role, tool.summary, tool.output, tool.useCase, tool.cost, tool.caution, tool.notice ?? '', ...tool.links.map((link) => link.url)]
       .join(' ').toLocaleLowerCase('ko-KR').includes(term),
   ));
 }

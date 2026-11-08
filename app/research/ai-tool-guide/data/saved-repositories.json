@@ -14,7 +14,8 @@
         "label": "저장소",
         "url": "https://github.com/NomaDamas/k-skill"
       }
-    ]
+    ],
+    "group": "automation"
   },
   {
     "id": "saved-clawd-on-desk",
@@ -34,7 +35,8 @@
         "label": "공식 문서",
         "url": "https://github.com/rullerzhou-afk/clawd-on-desk/blob/main/docs/guides/setup-guide.md"
       }
-    ]
+    ],
+    "group": "development"
   },
   {
     "id": "saved-whiteport",
@@ -50,7 +52,8 @@
         "label": "저장소",
         "url": "https://github.com/whiteport-collective/whiteport-design-studio"
       }
-    ]
+    ],
+    "group": "planning"
   },
   {
     "id": "saved-claw-code",
@@ -71,7 +74,8 @@
         "label": "사용 문서",
         "url": "https://github.com/ultraworkers/claw-code/blob/main/USAGE.md"
       }
-    ]
+    ],
+    "group": "development"
   },
   {
     "id": "saved-analyze-cc-prompts",
@@ -87,7 +91,8 @@
         "label": "저장소",
         "url": "https://github.com/ysys143/analyze-cc-prompts"
       }
-    ]
+    ],
+    "group": "development"
   },
   {
     "id": "saved-pm-skills",
@@ -103,7 +108,8 @@
         "label": "저장소",
         "url": "https://github.com/phuryn/pm-skills"
       }
-    ]
+    ],
+    "group": "planning"
   },
   {
     "id": "saved-headroom",
@@ -123,7 +129,8 @@
         "label": "공식 문서",
         "url": "https://docs.headroomlabs.ai/docs/quickstart"
       }
-    ]
+    ],
+    "group": "development"
   },
   {
     "id": "saved-awesome-design-md",
@@ -139,7 +146,8 @@
         "label": "저장소",
         "url": "https://github.com/VoltAgent/awesome-design-md"
       }
-    ]
+    ],
+    "group": "design"
   },
   {
     "id": "saved-frontend-slides",
@@ -155,7 +163,8 @@
         "label": "저장소",
         "url": "https://github.com/zarazhangrui/frontend-slides"
       }
-    ]
+    ],
+    "group": "media"
   },
   {
     "id": "saved-zeroclaw",
@@ -175,7 +184,8 @@
         "label": "공식 문서",
         "url": "https://github.com/zeroclaw-labs/zeroclaw/blob/master/docs/book/src/getting-started/quickstart.md"
       }
-    ]
+    ],
+    "group": "automation"
   },
   {
     "id": "saved-awesome-gpt-image",
@@ -191,7 +201,8 @@
         "label": "저장소",
         "url": "https://github.com/ZeroLu/awesome-gpt-image"
       }
-    ]
+    ],
+    "group": "design"
   },
   {
     "id": "saved-browser-tools-comparison",
@@ -207,7 +218,8 @@
         "label": "저장소",
         "url": "https://github.com/pim97/anti-detect-browser-tools-tech-comparison"
       }
-    ]
+    ],
+    "group": "knowledge"
   },
   {
     "id": "saved-voicestudio",
@@ -227,7 +239,8 @@
         "label": "모델 이용 조건",
         "url": "https://github.com/debpalash/VoiceStudio/blob/main/docs/licensing/model-inventory.md"
       }
-    ]
+    ],
+    "group": "media"
   },
   {
     "id": "saved-librechat",
@@ -247,6 +260,7 @@
         "label": "공식 문서",
         "url": "https://www.librechat.ai/docs/quick_start/local_setup"
       }
-    ]
+    ],
+    "group": "automation"
   }
 ]

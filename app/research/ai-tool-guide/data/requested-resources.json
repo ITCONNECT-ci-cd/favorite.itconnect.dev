@@ -18,7 +18,8 @@
         "label": "사용 제한",
         "url": "https://github.com/XiaoyeCodes/code-animation-prompts/blob/main/LICENSE.md"
       }
-    ]
+    ],
+    "group": "media"
   },
   {
     "id": "treg",
@@ -43,7 +44,8 @@
         "label": "서비스",
         "url": "https://treg.to"
       }
-    ]
+    ],
+    "group": "automation"
   },
   {
     "id": "obsidian-skills",
@@ -63,7 +65,8 @@
         "label": "CLI 조건",
         "url": "https://github.com/kepano/obsidian-skills/blob/main/skills/obsidian-cli/SKILL.md"
       }
-    ]
+    ],
+    "group": "knowledge"
   },
   {
     "id": "corevisos-library",
@@ -87,7 +90,8 @@
         "label": "사용 범위",
         "url": "https://lib.corevisos.com/ko/license/"
       }
-    ]
+    ],
+    "group": "design"
   },
   {
     "id": "find-skills",
@@ -111,7 +115,8 @@
         "label": "스킬 검색",
         "url": "https://skills.sh/"
       }
-    ]
+    ],
+    "group": "development"
   },
   {
     "id": "autorag",
@@ -136,7 +141,8 @@
         "label": "공식 문서",
         "url": "https://github.com/Marker-Inc-Korea/AutoRAG/blob/main/skills/autorag-lite-setup/SKILL.md"
       }
-    ]
+    ],
+    "group": "knowledge"
   },
   {
     "id": "rea-video",
@@ -156,7 +162,8 @@
         "label": "공식 문서",
         "url": "https://github.com/JuneYaooo/rea-video/blob/main/docs/cli.md"
       }
-    ]
+    ],
+    "group": "media"
   },
   {
     "id": "auto-ontology-mcp",
@@ -177,6 +184,7 @@
         "label": "보안 주의",
         "url": "https://github.com/gogoymh/auto-ontology-mcp#safety"
       }
-    ]
+    ],
+    "group": "knowledge"
   }
 ]
