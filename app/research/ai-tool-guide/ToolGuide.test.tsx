@@ -29,6 +29,19 @@ describe('AI 도구 가이드', () => {
     }
   });
 
+  it('오늘 조사한 업무 도구를 중복 없이 포함하고 Agent Browser는 관련 자료로 연결한다', () => {
+    expect(tools.filter((tool) => tool.group === 'workflow').map((tool) => tool.id)).toEqual([
+      'wondelai-skills', 'agent-desktop', 'prompt-master', 'humanizer',
+      'knowledge-work-plugins', 'custom-skills', 'connectors',
+    ]);
+    const desktop = tools.find((tool) => tool.id === 'agent-desktop')!;
+    expect(desktop.summary).toContain('Windows');
+    expect(desktop.cost).toContain('Apache-2.0');
+    expect(desktop.caution).toContain('보안 격리 환경이 아닙니다');
+    expect(desktop.links.map((link) => link.url)).toContain('https://github.com/vercel-labs/agent-browser');
+    expect(filterTools('Agent Browser', 'all').map((tool) => tool.id)).toEqual(['agent-desktop']);
+  });
+
   it('필터·검색·초기화를 반복해도 올바른 목록을 보여준다', () => {
     render(<ToolGuide />);
     expect(screen.getByRole('status')).toHaveTextContent('12개 항목');

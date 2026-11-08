@@ -60,6 +60,15 @@ beforeEach(() => {
 });
 
 describe('Sidebar', () => {
+  it('기존 홈 링크를 유지하고 AI 도구 가이드 메뉴로 /info에 이동한다', () => {
+    pathname.current = '/info';
+    renderSidebar();
+    expect(screen.getByRole('link', { name: /내 링크/ })).toHaveAttribute('href', '/');
+    const guide = screen.getByRole('link', { name: 'AI 도구 가이드' });
+    expect(guide).toHaveAttribute('href', '/info');
+    expect(guide).toHaveAttribute('aria-current', 'page');
+  });
+
   describe('상단 60px 블록 (DESIGN_SPEC 2장)', () => {
     it('"내 링크" 15px/700 과 우측 전체 개수 11px 을 보여준다', () => {
       renderSidebar();

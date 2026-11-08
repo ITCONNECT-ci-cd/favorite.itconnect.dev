@@ -104,7 +104,7 @@ describe('MobileChips — 구성 (프로토타입 navChips)', () => {
   it('각 칩이 제 화면으로 간다', () => {
     renderChips();
 
-    expect(chip('AI 도구 가이드')).toHaveAttribute('href', '/research/ai-tool-guide');
+    expect(chip('AI 도구 가이드')).toHaveAttribute('href', '/info');
     expect(chip('홈')).toHaveAttribute('href', '/');
     expect(chip('내 즐겨찾기')).toHaveAttribute('href', '/favorites');
     expect(chip('AI 도구 모음')).toHaveAttribute('href', '/category/ai');

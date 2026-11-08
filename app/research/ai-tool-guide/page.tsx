@@ -1,11 +1,6 @@
-import type { Metadata } from 'next';
-import { ToolGuide } from './ToolGuide';
-
-export const metadata: Metadata = {
-  title: 'AI 도구 가이드',
-  description: '디자인 도구 5개와 업무 확장 자료를 역할, 결과물, 비용, 설치 조건, 주의사항으로 비교하는 실무 안내서.',
-};
+import { permanentRedirect } from 'next/navigation';
+import { GUIDE_PATH } from './catalog';
 
 export default function AiToolGuidePage() {
-  return <ToolGuide />;
+  permanentRedirect(GUIDE_PATH);
 }

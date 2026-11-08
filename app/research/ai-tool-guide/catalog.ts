@@ -16,7 +16,7 @@ export type ToolEntry = {
 };
 
 export const REVIEWED_AT = '2026-11-08';
-export const GUIDE_PATH = '/research/ai-tool-guide';
+export const GUIDE_PATH = '/info';
 export const tools: ToolEntry[] = [
   {
     id: 'taste-skill', name: 'TasteSkill', group: 'design', kind: '코딩 에이전트 스킬', role: '뻔한 화면에서 벗어나기',
@@ -86,14 +86,14 @@ export const tools: ToolEntry[] = [
   },
   {
     id: 'agent-desktop', name: 'Vercel agent-desktop', group: 'workflow', kind: '데스크톱 자동화 도구', role: '앱 화면을 읽고 조작하기',
-    summary: '접근성 트리를 바탕으로 데스크톱 앱의 UI를 읽고 조작하는 도구입니다. 새로운 AI 모델이 아니라 에이전트가 컴퓨터를 사용할 수 있게 연결하는 실행 수단입니다.',
+    summary: 'macOS·Windows·Linux 앱의 접근성 트리를 읽고 조작하는 Rust CLI·MCP·C 라이브러리입니다. 자체 AI 모델은 없으며, 기존 에이전트에 데스크톱 실행 능력을 연결합니다.',
     output: '데스크톱 UI 읽기·클릭·입력',
-    useCase: '전용 API가 없는 반복 업무를 시험할 때 검토합니다. 외부 발송·삭제·결제처럼 영향이 큰 단계에는 사람의 확인을 두는 편이 안전합니다.',
-    cost: '현재 저장소의 LICENSE·지원 범위를 확인해야 합니다. 실행 환경과 연결된 AI 모델 비용은 별도입니다.',
-    setup: 'Mac에서는 접근성 권한, Linux에서는 GUI 환경 등이 필요합니다. 공식 문서의 운영체제별 요구사항을 먼저 확인합니다.',
-    caution: '앱 화면과 입력 권한은 민감한 데이터에 닿을 수 있습니다. 운영 계정에서 바로 자동화하지 말고 최소 권한·시험 데이터·명확한 작업 범위로 검증하세요.',
-    evidence: '앞선 공식 자료 조사 요약 · 설치·연동하지 않음',
-    links: [{ label: 'Vercel Labs 저장소', url: 'https://github.com/vercel-labs/agent-desktop' }, { label: '공식 데스크톱 문서', url: 'https://agent-browser.dev/desktop' }],
+    useCase: 'AX 교육 실습, API가 없는 업무 구간의 자동화 PoC, 로컬 실행 어댑터를 검토할 때 활용합니다. 웹 본문은 관련 도구 Agent Browser로, 네이티브 앱·파일 대화상자는 Agent Desktop으로 나눠 다룰 수 있습니다.',
+    cost: 'Apache-2.0 오픈소스입니다. 실행 환경과 연결된 AI 모델 비용은 별도입니다.',
+    setup: 'Mac에서는 접근성 권한, Linux에서는 GUI 환경 등이 필요합니다. 공식 문서의 운영체제별 요구사항을 확인하세요. 조사 당시 v1.2.0(2026-11-05)에서 stdio MCP가 추가됐습니다.',
+    caution: '앱별 접근성 호환성을 검증해야 하며, session은 보안 격리 환경이 아닙니다. 최소 권한·시험 데이터로 확인하고 외부 발송·삭제·결제에는 사람의 확인을 둡니다. 같은 이름의 다른 개발자 프로젝트와 혼동하지 마세요.',
+    evidence: 'Vercel Labs 공식 자료·v1.2.0 확인 · 설치·연동하지 않음',
+    links: [{ label: 'Vercel Labs 저장소', url: 'https://github.com/vercel-labs/agent-desktop' }, { label: '공식 데스크톱 문서', url: 'https://agent-browser.dev/desktop' }, { label: 'v1.2.0 릴리스', url: 'https://github.com/vercel-labs/agent-desktop/releases/tag/v1.2.0' }, { label: '관련 도구: Agent Browser', url: 'https://github.com/vercel-labs/agent-browser' }, { label: 'Agent Browser 공식 문서', url: 'https://agent-browser.dev' }],
   },
   {
     id: 'prompt-master', name: 'Prompt Master', group: 'workflow', kind: '프롬프트 설계 자료', role: '요청의 구조와 조건 다듬기',

@@ -257,8 +257,8 @@ export function Sidebar({
           })}
         </ul>
         <Link
-          href="/research/ai-tool-guide"
-          aria-current={isActive('/research/ai-tool-guide') ? 'page' : undefined}
+          href="/info"
+          aria-current={isActive('/info') ? 'page' : undefined}
           className="mt-[16px] flex min-h-[40px] items-center rounded-[6px] border border-border px-[12px] text-[13px] font-semibold text-sub hover:bg-select-hover"
         >
           AI 도구 가이드 <span aria-hidden="true" className="ml-auto">↗</span>
