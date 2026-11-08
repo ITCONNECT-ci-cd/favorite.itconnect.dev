@@ -73,6 +73,7 @@ export function MobileChips({ categories, operatingCategoryId }: MobileChipsProp
     { href: '/favorites', name: '내 즐겨찾기' },
     ...(operating === undefined ? [] : [chipOf(operating)]),
     ...tops.filter((category) => category.id !== operatingCategoryId).map(chipOf),
+    { href: '/research/ai-tool-guide', name: 'AI 도구 가이드' },
   ];
 
   return (

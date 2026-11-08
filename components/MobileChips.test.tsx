@@ -53,6 +53,7 @@ describe('MobileChips — 구성 (프로토타입 navChips)', () => {
       '기타',
       '참고자료',
       '구글 서비스',
+      'AI 도구 가이드',
     ]);
   });
 
@@ -60,7 +61,7 @@ describe('MobileChips — 구성 (프로토타입 navChips)', () => {
     renderChips();
 
     // 우리 시드에서는 맨 뒤라, 거르지 않으면 사이드바와 어긋난다. 빠른 접근 둘 바로 뒤가 자리다.
-    expect(chips()).toHaveLength(12);
+    expect(chips()).toHaveLength(13);
     expect(chips()[2]).toHaveTextContent('현재 운영 중인 사이트');
     expect(chips().filter((c) => c.textContent === '현재 운영 중인 사이트')).toHaveLength(1);
   });
@@ -81,6 +82,7 @@ describe('MobileChips — 구성 (프로토타입 navChips)', () => {
       '참고자료',
       '구글 서비스',
       '현재 운영 중인 사이트',
+      'AI 도구 가이드',
     ]);
   });
 
@@ -102,6 +104,7 @@ describe('MobileChips — 구성 (프로토타입 navChips)', () => {
   it('각 칩이 제 화면으로 간다', () => {
     renderChips();
 
+    expect(chip('AI 도구 가이드')).toHaveAttribute('href', '/research/ai-tool-guide');
     expect(chip('홈')).toHaveAttribute('href', '/');
     expect(chip('내 즐겨찾기')).toHaveAttribute('href', '/favorites');
     expect(chip('AI 도구 모음')).toHaveAttribute('href', '/category/ai');
@@ -192,7 +195,7 @@ describe('MobileChips ↔ Sidebar 교차 계약', () => {
         .map((link) => link.getAttribute('href'));
 
     // 길이도 함께 못박는다 — 양쪽이 똑같이 비어 버린 경우를 통과시키지 않기 위해서다.
-    expect(hrefsIn('바로 가기')).toHaveLength(12);
+    expect(hrefsIn('바로 가기')).toHaveLength(13);
     expect(hrefsIn('바로 가기')).toEqual(hrefsIn('사이드바'));
   });
 });
