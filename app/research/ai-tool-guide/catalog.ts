@@ -22,7 +22,7 @@ export type ToolEntry = {
   links: { label: string; url: string }[];
 };
 
-export const REVIEWED_AT = '2026-11-08';
+export const UPDATED_AT = '2026-11-09';
 export const GUIDE_PATH = '/info';
 export const originalTools: ToolEntry[] = [
   {

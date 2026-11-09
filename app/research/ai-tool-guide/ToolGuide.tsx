@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { filterTools, GROUP_LABELS, GROUP_ORDER, originalTools, REVIEWED_AT, tools, type ToolGroup } from './catalog';
+import { filterTools, GROUP_LABELS, GROUP_ORDER, originalTools, UPDATED_AT, tools, type ToolGroup } from './catalog';
 import styles from './page.module.css';
 
 const groups = [
@@ -39,7 +39,7 @@ export function ToolGuide() {
           <aside className={styles.heroAside} aria-label="가이드 범위">
             <div><strong>{tools.length}</strong><span>도구와 자료<br />기능·활용 한눈에</span></div>
             <div><strong>0{GROUP_ORDER.length}</strong><span>기능 카테고리<br />필요한 업무별로 탐색</span></div>
-            <p><time dateTime={REVIEWED_AT}>{REVIEWED_AT.replaceAll('-', '.')}</time> 확인 · 우리 프로젝트 제외<br />각 도구의 주된 기능을 기준으로 분류했습니다.</p>
+            <p><time dateTime={UPDATED_AT}>{UPDATED_AT.replaceAll('-', '.')}</time> 업데이트 · 우리 프로젝트 제외<br />각 도구의 주된 기능을 기준으로 분류했습니다.</p>
           </aside>
         </section>
 
