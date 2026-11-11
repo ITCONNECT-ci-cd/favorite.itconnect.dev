@@ -217,5 +217,178 @@
         "url": "https://craft.wiki/apps/filmcraft/workflows/"
       }
     ]
+  },
+  {
+    "id": "hyperframes",
+    "name": "HyperFrames",
+    "group": "media",
+    "kind": "영상 생성 스킬·앱",
+    "role": "말로 MP4 영상 만들기",
+    "summary": "코딩 AI에게 요청하면 화면을 만들어 MP4 영상으로 저장해 주는 HeyGen의 도구입니다.",
+    "useCase": "제품이나 교육 과정을 짧게 소개하는 영상이 필요할 때 검토합니다.",
+    "cost": "저장소는 Apache-2.0입니다. 기본 이용은 무료로 안내되어 있으나, /reverse-any-video, /style-sampling 스킬과 Studio 앱의 HeyGen 모델은 유료 Pro입니다. 코딩 AI 요금은 별도이며, Node.js 22 이상과 FFmpeg가 필요합니다.",
+    "caution": "Studio 앱은 처음 실행할 때 HeyGen 로그인을 요구합니다. Pro 기능을 무료인 것처럼 소개하면 안 됩니다.",
+    "notice": "일부 스킬과 Studio 앱의 HeyGen 모델은 유료 Pro입니다.",
+    "evidence": "2026-11-12 공식 저장소 메타·소스 페이지 확인. 설치·실행 미검증.",
+    "links": [
+      {
+        "label": "공식 저장소",
+        "url": "https://github.com/heygen-com/hyperframes"
+      },
+      {
+        "label": "공식 사이트",
+        "url": "https://hyperframes.heygen.com"
+      }
+    ]
+  },
+  {
+    "id": "hallmark",
+    "name": "Hallmark",
+    "group": "design",
+    "kind": "디자인 스킬",
+    "role": "테마 추천과 AI 티 검사",
+    "summary": "테마 50개 가운데 3개를 추천받아 페이지를 만들고, AI가 만든 화면처럼 보이지 않는지 검사하는 디자인 스킬입니다. 이미 있는 페이지는 글과 기능을 둔 채 디자인만 바꿀 수도 있습니다.",
+    "useCase": "카페·과정 소개처럼 새로운 소개 페이지를 빠르게 만들거나, 이미 있는 랜딩페이지의 디자인만 다듬을 때 활용합니다.",
+    "cost": "저장소는 MIT 오픈소스입니다. Node.js 22.20 이상과 코딩 AI가 필요하며, AI 에이전트 요금은 별도입니다.",
+    "caution": "코덱스에서는 /hallmark 대신 $hallmark로 부릅니다. 브라우저 검사까지 하려면 Chrome과 puppeteer-core가 더 필요하고, 없으면 정적 검사만 돌아갑니다.",
+    "evidence": "2026-11-12 공식 저장소 메타·소스 페이지 확인. 설치·실행 미검증.",
+    "links": [
+      {
+        "label": "공식 저장소",
+        "url": "https://github.com/Nutlope/hallmark"
+      },
+      {
+        "label": "공식 사이트",
+        "url": "https://www.usehallmark.com/"
+      }
+    ]
+  },
+  {
+    "id": "freellmapi",
+    "name": "FreeLLMAPI",
+    "group": "development",
+    "kind": "모델 연결 도구",
+    "role": "무료 AI 사용량 한곳으로 모으기",
+    "summary": "여러 회사의 무료 사용량을 한 주소로 모아 호출하는 도구입니다. 회사가 34곳이라고 안내되어 있으며, 등록한 키의 모델만 쓸 수 있습니다.",
+    "useCase": "교육 실습이나 내부 실험에서 여러 무료 모델의 한도를 나눠 쓰고 싶을 때 검토합니다. 고객 서비스나 운영 환경에 바로 넣기보다 시험용으로 보는 편이 맞습니다.",
+    "cost": "저장소는 MIT입니다. 쓸 회사마다 API 키가 필요하고, 명령으로 설치할 때는 Docker도 필요합니다. 맥·윈도우용 데스크톱 앱도 있습니다.",
+    "caution": "공식 안내에 개인 실험·학습용이라고 적혀 있습니다. 무료 설치본은 새 모델이 30일 늦게 들어오며, 2026년 11월 7일 공식 안내 기준으로 약 303개가 뒤처져 있습니다. 최상위 모델은 없고, 하루 한도가 차면 답 품질이 떨어질 수 있습니다. 한도는 한국 시간 오전 9시에 풀립니다.",
+    "notice": "개인 실험과 학습용입니다. 고객 서비스에는 넣지 마세요.",
+    "evidence": "2026-11-12 공식 저장소 메타·소스 페이지 확인. 설치·실행 미검증.",
+    "links": [
+      {
+        "label": "공식 저장소",
+        "url": "https://github.com/tashfeenahmed/freellmapi"
+      },
+      {
+        "label": "공식 사이트",
+        "url": "https://freellmapi.co"
+      }
+    ]
+  },
+  {
+    "id": "rea",
+    "name": "rea",
+    "group": "development",
+    "kind": "앱 분석 도구",
+    "role": "앱 기능의 동작 방식 분석",
+    "summary": "앱의 기능이 어떻게 동작하는지 AI가 근거를 찾아 설명하게 하는 도구입니다. 영상을 장면별로 나누는 rea-video와는 다른 저장소입니다.",
+    "useCase": "우리 제품과 비슷한 기능의 동작 방식을 파악하거나, 교육에서 기능을 재구성하는 과정을 설명할 때 참고합니다. 분석 권한이 있는 프로그램에만 씁니다.",
+    "cost": "저장소는 MIT입니다. Node.js와 코딩 AI가 필요하며, 모델 요금은 별도입니다. 완성된 앱을 깊게 보려면 Hopper, Ghidra, IDA, Kuna 가운데 하나가 더 필요할 수 있고, 유료 도구는 정식 라이선스가 필요합니다.",
+    "caution": "내 프로그램이거나 분석 허락을 받은 프로그램에만 쓰세요. 설치는 대상 앱 폴더가 아닌, 믿을 수 있는 폴더에서 진행해야 합니다.",
+    "notice": "이미 있는 rea-video와 다른 도구입니다. 분석 허락을 받은 프로그램에만 쓰세요.",
+    "evidence": "2026-11-12 공식 저장소 메타·소스 페이지 확인. 설치·실행 미검증.",
+    "links": [
+      {
+        "label": "공식 저장소",
+        "url": "https://github.com/morluto/rea"
+      },
+      {
+        "label": "공식 사이트",
+        "url": "https://rea.tools"
+      }
+    ]
+  },
+  {
+    "id": "impeccable",
+    "name": "Impeccable",
+    "group": "design",
+    "kind": "디자인 수정 스킬",
+    "role": "한 단어로 화면 다듬기",
+    "summary": "bolder, polish 같은 짧은 지시로 화면의 글자 크기·여백·색을 다듬는 디자인 스킬입니다.",
+    "useCase": "이미 있는 설정 화면이나 소개 페이지의 밀도를 빠르게 손볼 때 활용합니다.",
+    "cost": "저장소는 Apache-2.0입니다. Node.js와 코딩 AI가 필요하며, 에이전트 요금은 별도입니다.",
+    "caution": "훅을 켜면 AI 명령을 거부해도 검사가 실행됩니다. live 모드는 내 컴퓨터의 작업본에만 쓰고, 세션이 끊긴 상태에서 적용하면 코딩 AI가 승인 없이 명령을 실행할 수 있습니다. 익명으로 디자인 방향 기록을 보내므로, 끄려면 공식 안내의 telemetry off 명령을 쓰면 됩니다. 코덱스에서는 $impeccable로 부릅니다.",
+    "notice": "설치된 훅은 AI 명령을 거부해도 돌아갑니다. live 모드는 로컬 작업본에만 쓰세요.",
+    "evidence": "2026-11-12 공식 저장소 메타·소스 페이지 확인. 설치·실행 미검증.",
+    "links": [
+      {
+        "label": "공식 저장소",
+        "url": "https://github.com/pbakaus/impeccable"
+      },
+      {
+        "label": "공식 사이트",
+        "url": "https://impeccable.style"
+      }
+    ]
+  },
+  {
+    "id": "t3-code",
+    "name": "T3 Code",
+    "group": "development",
+    "kind": "코딩 AI 조종 앱",
+    "role": "여러 화면에서 코딩 AI 사용",
+    "summary": "컴퓨터에 설치해 둔 코딩 AI를 휴대폰, 웹, 데스크톱의 한 화면에서 다루는 도구입니다. 쓰는 구독을 그대로 연결합니다.",
+    "useCase": "자리를 비운 채 진행 중인 코딩 작업을 휴대폰에서 확인하거나, 여러 코딩 AI를 한 화면에서 고를 때 검토합니다.",
+    "cost": "저장소는 MIT이고 앱은 무료로 안내되어 있습니다. 이미 로그인된 코딩 AI가 하나 이상 필요하며, 그 서비스 요금은 별도입니다.",
+    "caution": "공식 안내에 아직 아주 초기 단계라 버그를 예상하라고 적혀 있습니다. 클로드 코드, 코덱스, 커서 등 각 도구에 먼저 로그인해야 합니다.",
+    "evidence": "2026-11-12 공식 저장소 메타·소스 페이지 확인. 설치·실행 미검증.",
+    "links": [
+      {
+        "label": "공식 저장소",
+        "url": "https://github.com/pingdotgg/t3code"
+      },
+      {
+        "label": "공식 사이트",
+        "url": "https://t3.codes"
+      }
+    ]
+  },
+  {
+    "id": "security-audit-skill",
+    "name": "Cloudflare security-audit-skill",
+    "group": "development",
+    "kind": "보안 점검 스킬",
+    "role": "코드 보안 구멍 점검",
+    "summary": "코딩 AI가 코드를 여러 단계로 살펴 보안 문제를 찾고, 다시 검증해 확정·추가 확인·기각으로 나눈 보고서를 만드는 스킬입니다.",
+    "useCase": "자체 서비스나 고객 납품 코드를 배포하기 전에 점검 목록을 만들 때 참고합니다. 이 보고서만으로 보안 인증이나 점검을 마친 것으로 보면 안 됩니다.",
+    "cost": "저장소는 MIT입니다. Node.js 22.20 이상과, 하위 에이전트를 나란히 돌릴 수 있는 코딩 AI가 필요합니다. 에이전트 요금은 별도입니다.",
+    "caution": "대상 코드를 실행해 확인하려면 인터넷을 막은 격리 환경이 필요합니다. 없으면 실행하지 않고 추가 확인으로 남깁니다. 공식 시험에서는 한 번 실행으로 반복 검사에서 찾은 문제의 절반쯤을 찾았다고 안내하므로, 여러 번 돌리고 사람이 결과를 검토해야 합니다.",
+    "evidence": "2026-11-12 공식 저장소 메타·소스 페이지 확인. 설치·실행 미검증.",
+    "links": [
+      {
+        "label": "공식 저장소",
+        "url": "https://github.com/cloudflare/security-audit-skill"
+      }
+    ]
+  },
+  {
+    "id": "ghidra",
+    "name": "Ghidra",
+    "group": "development",
+    "kind": "프로그램 분석 도구",
+    "role": "프로그램을 읽을 수 있는 코드로 풀기",
+    "summary": "미국 국가안보국(NSA)이 공개한 프로그램 분석 도구입니다. 코딩 AI 없이 따로 실행됩니다.",
+    "useCase": "우리가 만든 프로그램이나 분석 허락을 받은 프로그램을 살펴볼 때, 또는 관련 도구의 분석 결과를 이해할 때 참고합니다.",
+    "cost": "저장소는 Apache-2.0입니다. JDK 25 64비트가 필요합니다.",
+    "caution": "허락 없이 다른 사람의 프로그램을 분석하면 안 됩니다. 공식 안내에 일부 버전의 보안 공지가 있으므로, 쓰기 전에 저장소의 보안 안내를 확인하세요. 이전 설치본 위에 덮어 풀지 않습니다.",
+    "notice": "내 프로그램이거나 분석 허락을 받은 프로그램에만 쓰세요.",
+    "evidence": "2026-11-12 공식 저장소 메타·소스 페이지 확인. 설치·실행 미검증.",
+    "links": [
+      {
+        "label": "공식 저장소",
+        "url": "https://github.com/NationalSecurityAgency/ghidra"
+      }
+    ]
   }
 ]

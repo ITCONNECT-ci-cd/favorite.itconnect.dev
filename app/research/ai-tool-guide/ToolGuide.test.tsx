@@ -4,10 +4,10 @@ import { ToolGuide } from './ToolGuide';
 import { filterTools, GROUP_LABELS, GROUP_ORDER, originalTools, tools } from './catalog';
 
 describe('AI 도구 가이드', () => {
-  it('35개 카드 모두 기능·활용만 기본 표시하고 시작 방법은 제공하지 않는다', () => {
+  it('43개 카드 모두 기능·활용만 기본 표시하고 시작 방법은 제공하지 않는다', () => {
     render(<ToolGuide />);
     const cards = screen.getAllByRole('article');
-    expect(cards).toHaveLength(35);
+    expect(cards).toHaveLength(43);
     for (const card of cards) {
       expect(within(card).getByText('기능과 역할')).toBeInTheDocument();
       expect(within(card).getByText('우리 업무 활용')).toBeInTheDocument();
@@ -17,15 +17,15 @@ describe('AI 도구 가이드', () => {
     expect(filterTools('npx skills add', 'all')).toEqual([]);
   });
 
-  it('35개를 기능별 6개 카테고리로 중복 없이 분류하고 원래 자료를 보존한다', () => {
+  it('43개를 기능별 6개 카테고리로 중복 없이 분류하고 원래 자료를 보존한다', () => {
     expect(originalTools).toHaveLength(12);
-    expect(tools).toHaveLength(35);
-    expect(new Set(tools.map((tool) => tool.id)).size).toBe(35);
-    expect(GROUP_ORDER.map((group) => filterTools('', group).length)).toEqual([8, 5, 5, 5, 4, 8]);
+    expect(tools).toHaveLength(43);
+    expect(new Set(tools.map((tool) => tool.id)).size).toBe(43);
+    expect(GROUP_ORDER.map((group) => filterTools('', group).length)).toEqual([10, 10, 5, 6, 4, 8]);
     expect(tools.every((tool) => GROUP_ORDER.includes(tool.group))).toBe(true);
     expect(tools.flatMap((tool) => tool.links).some((link) => /github\.com\/ITCONNECT-ci-cd\//i.test(link.url))).toBe(false);
     const repositories = tools.filter((tool) => !originalTools.some((original) => original.id === tool.id));
-    expect(new Set(repositories.map((tool) => tool.links[0].url.toLowerCase().replace(/\/$/, ''))).size).toBe(23);
+    expect(new Set(repositories.map((tool) => tool.links[0].url.toLowerCase().replace(/\/$/, ''))).size).toBe(31);
     expect(tools.find((tool) => tool.id === 'corevisos-library')?.kind).toContain('웹사이트');
     for (const id of ['treg', 'code-animation-prompts', 'autorag', 'auto-ontology-mcp']) {
       expect(tools.find((tool) => tool.id === id)?.notice?.length).toBeGreaterThan(15);
@@ -56,10 +56,10 @@ describe('AI 도구 가이드', () => {
     fireEvent.change(screen.getByRole('searchbox'), { target: { value: '없는도구' } });
     fireEvent.click(screen.getByRole('link', { name: '개발 도구 보기' }));
     expect(screen.getByRole('searchbox')).toHaveValue('');
-    expect(screen.getAllByRole('article')).toHaveLength(5);
-    expect(screen.getByRole('button', { name: '개발 5' })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getAllByRole('article')).toHaveLength(10);
+    expect(screen.getByRole('button', { name: '개발 10' })).toHaveAttribute('aria-pressed', 'true');
     fireEvent.click(screen.getByRole('link', { name: '전체 도구 보기 ↓' }));
-    expect(screen.getAllByRole('article')).toHaveLength(35);
+    expect(screen.getAllByRole('article')).toHaveLength(43);
   });
 
   it('검색은 대소문자·앞뒤 공백을 무시하고 이름·용도·주의사항을 포함한다', () => {
@@ -98,13 +98,13 @@ describe('AI 도구 가이드', () => {
 
   it('필터·검색·초기화를 반복해도 올바른 목록을 보여준다', () => {
     render(<ToolGuide />);
-    expect(screen.getByRole('status')).toHaveTextContent('35개 항목');
+    expect(screen.getByRole('status')).toHaveTextContent('43개 항목');
     fireEvent.click(screen.getByRole('button', { name: '기획·문서 5' }));
     expect(screen.getByRole('status')).toHaveTextContent('5개 항목');
     fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'humanizer' } });
     expect(screen.getByRole('status')).toHaveTextContent('1개 항목');
     expect(screen.getAllByRole('article')).toHaveLength(1);
-    fireEvent.click(screen.getByRole('button', { name: '개발 5' }));
+    fireEvent.click(screen.getByRole('button', { name: '개발 10' }));
     expect(screen.queryAllByRole('article')).toHaveLength(0);
     fireEvent.click(screen.getByRole('button', { name: '기획·문서 5' }));
     expect(screen.getAllByRole('article')).toHaveLength(1);
@@ -112,8 +112,8 @@ describe('AI 도구 가이드', () => {
     expect(screen.queryAllByRole('article')).toHaveLength(0);
     fireEvent.click(screen.getByRole('button', { name: '검색·분류 초기화' }));
     expect(screen.getByRole('searchbox')).toHaveValue('');
-    expect(screen.getAllByRole('article')).toHaveLength(35);
-    expect(screen.getByRole('button', { name: '전체 35' })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getAllByRole('article')).toHaveLength(43);
+    expect(screen.getByRole('button', { name: '전체 43' })).toHaveAttribute('aria-pressed', 'true');
   });
 
   it('빠른 비교 링크는 필터를 초기화해 대상 카드가 사라지지 않게 한다', () => {
@@ -136,13 +136,45 @@ describe('AI 도구 가이드', () => {
     expect(filmcraft.notice).toContain('알파 단계');
     expect(filterTools('자막 배속', 'media').map((tool) => tool.id)).toContain('filmcraft-cli');
     render(<ToolGuide />);
-    fireEvent.click(screen.getByRole('button', { name: '영상·음성 5' }));
+    fireEvent.click(screen.getByRole('button', { name: '영상·음성 6' }));
     fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'FilmCraft' } });
     expect(screen.getAllByRole('article')).toHaveLength(1);
     const row = screen.getByRole('heading', { name: 'FilmCraft CLI' }).closest('article')!;
     expect(within(row).getByText(filmcraft.summary).closest('details')).toBeNull();
     expect(within(row).getByText(filmcraft.useCase).closest('details')).toBeNull();
     expect(within(row).getByText(filmcraft.notice!).closest('details')).toBeNull();
+  });
+
+  it('2026-11-12 GitHub AI 도구 8개를 중복 없이 추가하고 TasteSkill 2.5판을 반영한다', () => {
+    const added = {
+      hyperframes: ['media', 'https://github.com/heygen-com/hyperframes'],
+      hallmark: ['design', 'https://github.com/Nutlope/hallmark'],
+      freellmapi: ['development', 'https://github.com/tashfeenahmed/freellmapi'],
+      rea: ['development', 'https://github.com/morluto/rea'],
+      impeccable: ['design', 'https://github.com/pbakaus/impeccable'],
+      't3-code': ['development', 'https://github.com/pingdotgg/t3code'],
+      'security-audit-skill': ['development', 'https://github.com/cloudflare/security-audit-skill'],
+      ghidra: ['development', 'https://github.com/NationalSecurityAgency/ghidra'],
+    } as const;
+    for (const [id, [group, url]] of Object.entries(added)) {
+      const matches = tools.filter((tool) => tool.id === id);
+      expect(matches).toHaveLength(1);
+      expect(matches[0].group).toBe(group);
+      expect(matches[0].links[0].url).toBe(url);
+      expect(matches[0].evidence).toContain('2026-11-12');
+    }
+    const rea = tools.find((tool) => tool.id === 'rea')!;
+    const reaVideo = tools.find((tool) => tool.id === 'rea-video')!;
+    expect(rea.links[0].url).not.toBe(reaVideo.links[0].url);
+    expect(rea.notice).toContain('rea-video와 다른 도구');
+    expect(tools.filter((tool) => /voicestudio/i.test(tool.links[0].url))).toHaveLength(1);
+    const taste = tools.find((tool) => tool.id === 'taste-skill')!;
+    expect(taste.caution).toContain('2.5판');
+    expect(taste.output).toBe('브라우저에서 확인한 웹페이지와 구현 코드');
+    expect(taste.evidence).toContain('2026-11-12');
+    render(<ToolGuide />);
+    expect(screen.getAllByRole('link', { name: /상세 보기$/ })).toHaveLength(5);
+    expect(screen.getByText('2026.11.12')).toBeInTheDocument();
   });
 
   it('출처는 새 탭임을 알리고 안전한 rel을 가지며 원래 사이트로 돌아갈 수 있다', () => {
