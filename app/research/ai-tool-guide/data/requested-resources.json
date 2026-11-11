@@ -562,5 +562,82 @@
         "url": "https://twenty.com"
       }
     ]
+  },
+  {
+    "id": "netryx-astra-v2",
+    "name": "Netryx Astra V2",
+    "group": "knowledge",
+    "kind": "사진 위치 추정 도구",
+    "role": "사진에 드러난 촬영 장소 단서 확인",
+    "summary": "사진을 거리 이미지 색인과 비교해 촬영 장소 후보를 찾는 AI 도구입니다. GPS 메타데이터가 없어도 시각적 특징을 비교하지만, 색인이 없는 지역이나 비슷한 건물에서는 틀릴 수 있습니다.",
+    "useCase": "우리가 촬영했거나 사용 허가를 받은 사진에서 위치 노출 가능성을 점검하고, AI 교육에서 시각 검색과 개인정보 보호 사례를 설명할 때 검토합니다.",
+    "cost": "README는 MIT로 안내하지만 현재 저장소에서 LICENSE 파일은 확인되지 않았습니다. 핵심 의존성 MASt3R의 원본 라이선스는 CC BY-NC-SA 4.0으로 비상업 제한이 있어, 상업적 활용 전 별도 권리 확인이 필요합니다. 장비·지도 데이터 이용 비용과 조건도 별도입니다.",
+    "caution": "원 제작자가 구버전 대신 안내한 Astra V2입니다. 실시간 위치 추적 도구가 아니며 정확한 좌표를 보장하지 않습니다. 사람의 집·직장·현재 위치 추적에 사용하지 마세요. 외부 지도 이미지·공유 색인의 이용 조건을 확인하고 민감한 사진은 외부 서비스에 올리지 마세요. README의 MASt3R 라이선스 설명은 원본 LICENSE와 다릅니다.",
+    "notice": "본인 또는 허가받은 사진만 점검하세요. MASt3R의 비상업 라이선스로 상업 사용 전 확인이 필요합니다.",
+    "evidence": "2026-11-12 공식 신·구 README와 MASt3R LICENSE 대조. 설치·정확도 미검증.",
+    "links": [
+      {
+        "label": "공식 최신 저장소",
+        "url": "https://github.com/sparkyniner/Netryx-Astra-V2-Geolocation-Tool"
+      },
+      {
+        "label": "구버전의 이전 안내",
+        "url": "https://github.com/sparkyniner/Netryx-OpenSource-Next-Gen-Street-Level-Geolocation"
+      },
+      {
+        "label": "MASt3R 이용 조건",
+        "url": "https://github.com/naver/mast3r/blob/main/LICENSE"
+      }
+    ]
+  },
+  {
+    "id": "aimap-bishopfox",
+    "name": "AIMap",
+    "group": "development",
+    "kind": "AI 서버 보안 점검 도구",
+    "role": "내 AI 서버의 외부 노출 확인",
+    "summary": "Bishop Fox가 만든 AI 서비스 보안 점검 도구입니다. MCP·Ollama 등 외부에 드러난 서비스의 종류와 인증·도구 노출 상태를 파악하고 자체 기준의 위험 점수로 정리합니다.",
+    "useCase": "우리 회사가 운영하는 AI 서버나 서면으로 점검을 허가받은 고객 환경에서, 공개 범위와 인증 설정을 확인하고 보완 우선순위를 정할 때 검토합니다.",
+    "cost": "MIT 오픈소스입니다. 탐색에는 Shodan API 키가 필요하며 해당 요금제·서버 비용은 별도입니다. 선택형 AI 분석 등 외부 서비스 비용도 따로 확인해야 합니다.",
+    "caution": "0~10 위험 점수는 도구 자체 기준이며 공인 보안등급이나 침해 확정 증거가 아닙니다. 능동 점검은 대상 서비스에 요청을 보내므로 사전 범위·부하·시간을 합의해야 합니다. 점검 도구 자체의 인증·접근 제한도 설정하고, 결과의 주소·취약점·민감정보를 공개하지 마세요.",
+    "notice": "본인 서버 또는 명시적 서면 허가를 받은 자산만 점검하세요. 무단 스캔·접근에 사용하지 마세요.",
+    "evidence": "2026-11-12 Bishop Fox 공식 README·LICENSE 확인. 설치·스캔·보안 성능 미검증.",
+    "links": [
+      {
+        "label": "공식 저장소",
+        "url": "https://github.com/BishopFox/aimap"
+      },
+      {
+        "label": "공식 이용 조건",
+        "url": "https://github.com/BishopFox/aimap/blob/main/LICENSE"
+      }
+    ]
+  },
+  {
+    "id": "voidaccess",
+    "name": "VoidAccess",
+    "group": "knowledge",
+    "kind": "공개 위협정보 조사 도구",
+    "role": "회사·자산의 유출 의심 흔적 조사",
+    "summary": "Tor 검색과 공개 웹·코드 저장소·보안 피드에서 위협 관련 단서를 모아 출처가 있는 보고서와 관계 그래프로 정리합니다. 회사명이나 자산의 언급을 조사할 수 있지만 이름 검색만으로 유출을 확정할 수는 없습니다.",
+    "useCase": "본인 정보와 우리 회사명·도메인 등 허가된 범위의 공개 언급을 확인하고, 유출 의심 단서를 보안 담당자가 검증할 자료로 정리할 때 검토합니다.",
+    "cost": "MIT 오픈소스입니다. 자체 운영 장비와 선택한 LLM·외부 정보 API 비용은 별도이며, 공식 호스팅 서비스의 현재 요금·무료 범위는 확인하지 않았습니다.",
+    "caution": "다크웹 전체나 모든 유출을 찾는 도구가 아닙니다. 동명이인·허위 정보·누락과 AI 요약 오류가 있어 원출처를 대조해야 합니다. 검색어와 수집 내용이 외부 검색 서비스·LLM에 전달될 수 있으므로 비밀번호·토큰·비공개 고객정보를 입력하지 마세요. 불법 자료 접근·다운로드와 안전 필터 우회는 금지하고, 조사 결과의 개인정보를 재게시하지 마세요.",
+    "notice": "본인 정보와 허가받은 회사·자산만 조사하세요. 검색 결과는 유출 확정 증거가 아니며 민감정보를 입력하지 마세요.",
+    "evidence": "2026-11-12 공식 README·MIT LICENSE·Usage Policy 확인. 설치·다크웹 검색·탐지 성능 미검증.",
+    "links": [
+      {
+        "label": "공식 저장소",
+        "url": "https://github.com/KatrielMoses/voidaccess"
+      },
+      {
+        "label": "허용·금지 사용 범위",
+        "url": "https://github.com/KatrielMoses/voidaccess/blob/main/docs/USAGE_POLICY.md"
+      },
+      {
+        "label": "공식 이용 조건",
+        "url": "https://github.com/KatrielMoses/voidaccess/blob/main/LICENSE"
+      }
+    ]
   }
 ]

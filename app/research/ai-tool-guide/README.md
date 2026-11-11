@@ -2,12 +2,19 @@
 
 ## 현재 표시 기준
 
-- 전체 51개를 디자인 11, 개발 10, 기획·문서 5, 영상·음성 6, 지식·데이터 7, 업무 자동화 12의 주 기능 기준으로 분류한다. 추가 요청·기존 저장소 같은 유입 경로는 화면 분류로 쓰지 않는다.
+- 전체 54개를 디자인 11, 개발 11, 기획·문서 5, 영상·음성 6, 지식·데이터 9, 업무 자동화 12의 주 기능 기준으로 분류한다. 추가 요청·기존 저장소 같은 유입 경로는 화면 분류로 쓰지 않는다.
 - 모든 화면에서 한 행에 한 항목을 표시한다. 넓은 화면은 이름·기능·활용을 나란히, 모바일은 같은 행 안에서 세로로 읽는다. 카테고리 표시·필터·검색을 함께 제공한다.
 
 - 사용자의 후속 요청에 따라 전체 34개의 기능·역할·업무 활용 문장을 다시 작성했다. 기본 카드에는 `기능과 역할`, `우리 업무 활용` 두 내용만 표시한다.
 - 설치·시작 방법인 `setup`은 카드 데이터와 검색 대상에서 제거했다. 제목·소개·메타데이터의 시작 안내 표현도 수정했다. 비용·주의·출처와 필요한 보안·이용 제한 알림은 유지한다.
 - 북마크 DB 등록은 기존 로그인 대기 상태를 유지한다. 원본 데이터·홈·메뉴·인증·공개 범위를 변경하지 않는다.
+
+## 2026-11-12 허가된 보안·위치 점검 자료 3개 추가
+
+- 최신 운영 배포·GitHub main·Mac 작업 트리의 기준 커밋 `2c87dab`(51개)이 일치함을 확인하고 기존 항목은 보존했다. Netryx Astra V2·VoidAccess는 지식·데이터, Bishop Fox AIMap은 개발에 추가했다.
+- Netryx 구 저장소가 안내한 V2를 사용했다. V2 README의 MIT 표기와 달리 최상위 LICENSE 파일은 확인되지 않았다. 특히 README의 MASt3R Apache-2.0 설명과 원본 `naver/mast3r/LICENSE`의 CC BY-NC-SA 4.0이 달라 상업 사용 주의를 기본 화면에 표시한다.
+- AIMap의 0~10점은 자체 기준이며 침해 확정이 아니다. VoidAccess의 검색 결과는 유출 확정이나 전체 범위 확인이 아니다. 본인·명시적 허가 범위, 민감정보 보호, 능동 점검 주의를 기재했다.
+- 세 도구를 설치·실행하거나 사진 업로드·서버 스캔·다크웹 검색을 하지 않았다. 안내 페이지 데이터와 관련 검증·메타데이터만 수정한다.
 
 ## 2026-11-12 영업·고객 발굴 도구 7개 추가
 
@@ -49,4 +56,4 @@
 - 오늘 대화의 12개 항목을 중복 없이 수록한다. Agent Desktop 카드에는 공식 v1.2.0·Windows 지원·Apache-2.0·MCP와 관련 도구 Agent Browser를 추가 확인해 반영했다. Agent Browser는 관련 자료로 묶고 별도 항목 수에는 중복 계산하지 않는다.
 - 테스트: `npm test -- app/info/page.test.tsx app/research/ai-tool-guide/page.test.ts app/research/ai-tool-guide/ToolGuide.test.tsx components/Sidebar.test.tsx components/MobileChips.test.tsx`, `npm run typecheck`, `npm run lint`.
 - Node 26에서는 기존 테스트의 Web Storage 전역 충돌을 피하려면 `NODE_OPTIONS=--no-experimental-webstorage npm test`를 사용한다. 운영 Node 24 설정은 변경하지 않는다.
-- 배포 기준은 Vercel의 현재 파일 기반 배포다. 로컬의 다른 변경을 운영에 덮어쓰지 않도록 현재 배포 파일 SHA를 보존하고, 가이드 폴더와 Sidebar/MobileChips 관련 변경만 교체한다. 환경변수·proxy·DB·관리자 코드는 보존한다.
+- 배포 시 현재 Vercel의 소스 유형과 커밋을 다시 확인한다. 2026-11-12 현재는 GitHub `ITCONNECT-ci-cd/favorite.itconnect.dev`의 main 연동 배포이며, 최신 운영·원격·로컬 커밋을 대조한 뒤 이번 요청의 가이드 관련 변경만 반영한다. 환경변수·proxy·DB·관리자·홈·메뉴 코드는 보존한다.

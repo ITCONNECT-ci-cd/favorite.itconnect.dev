@@ -4,10 +4,10 @@ import { ToolGuide } from './ToolGuide';
 import { filterTools, GROUP_LABELS, GROUP_ORDER, originalTools, tools } from './catalog';
 
 describe('AI 도구 가이드', () => {
-  it('51개 카드 모두 기능·활용만 기본 표시하고 시작 방법은 제공하지 않는다', () => {
+  it('54개 카드 모두 기능·활용만 기본 표시하고 시작 방법은 제공하지 않는다', () => {
     render(<ToolGuide />);
     const cards = screen.getAllByRole('article');
-    expect(cards).toHaveLength(51);
+    expect(cards).toHaveLength(54);
     for (const card of cards) {
       expect(within(card).getByText('기능과 역할')).toBeInTheDocument();
       expect(within(card).getByText('우리 업무 활용')).toBeInTheDocument();
@@ -17,15 +17,15 @@ describe('AI 도구 가이드', () => {
     expect(filterTools('npx skills add', 'all')).toEqual([]);
   });
 
-  it('51개를 기능별 6개 카테고리로 중복 없이 분류하고 원래 자료를 보존한다', () => {
+  it('54개를 기능별 6개 카테고리로 중복 없이 분류하고 원래 자료를 보존한다', () => {
     expect(originalTools).toHaveLength(12);
-    expect(tools).toHaveLength(51);
-    expect(new Set(tools.map((tool) => tool.id)).size).toBe(51);
-    expect(GROUP_ORDER.map((group) => filterTools('', group).length)).toEqual([11, 10, 5, 6, 7, 12]);
+    expect(tools).toHaveLength(54);
+    expect(new Set(tools.map((tool) => tool.id)).size).toBe(54);
+    expect(GROUP_ORDER.map((group) => filterTools('', group).length)).toEqual([11, 11, 5, 6, 9, 12]);
     expect(tools.every((tool) => GROUP_ORDER.includes(tool.group))).toBe(true);
     expect(tools.flatMap((tool) => tool.links).some((link) => /github\.com\/ITCONNECT-ci-cd\//i.test(link.url))).toBe(false);
     const repositories = tools.filter((tool) => !originalTools.some((original) => original.id === tool.id));
-    expect(new Set(repositories.map((tool) => tool.links[0].url.toLowerCase().replace(/\/$/, ''))).size).toBe(39);
+    expect(new Set(repositories.map((tool) => tool.links[0].url.toLowerCase().replace(/\/$/, ''))).size).toBe(42);
     expect(tools.find((tool) => tool.id === 'corevisos-library')?.kind).toContain('웹사이트');
     for (const id of ['treg', 'code-animation-prompts', 'autorag', 'auto-ontology-mcp']) {
       expect(tools.find((tool) => tool.id === id)?.notice?.length).toBeGreaterThan(15);
@@ -56,10 +56,10 @@ describe('AI 도구 가이드', () => {
     fireEvent.change(screen.getByRole('searchbox'), { target: { value: '없는도구' } });
     fireEvent.click(screen.getByRole('link', { name: '개발 도구 보기' }));
     expect(screen.getByRole('searchbox')).toHaveValue('');
-    expect(screen.getAllByRole('article')).toHaveLength(10);
-    expect(screen.getByRole('button', { name: '개발 10' })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getAllByRole('article')).toHaveLength(11);
+    expect(screen.getByRole('button', { name: '개발 11' })).toHaveAttribute('aria-pressed', 'true');
     fireEvent.click(screen.getByRole('link', { name: '전체 도구 보기 ↓' }));
-    expect(screen.getAllByRole('article')).toHaveLength(51);
+    expect(screen.getAllByRole('article')).toHaveLength(54);
   });
 
   it('검색은 대소문자·앞뒤 공백을 무시하고 이름·용도·주의사항을 포함한다', () => {
@@ -67,7 +67,7 @@ describe('AI 도구 가이드', () => {
     expect(filterTools('한국어', 'all').map((tool) => tool.id)).toContain('humanizer');
     expect(filterTools('학생정보', 'all').map((tool) => tool.id)).toContain('design-md-chrome');
     expect(filterTools('Humanizer', 'design')).toEqual([]);
-    expect(filterTools('지식·데이터', 'all')).toHaveLength(7);
+    expect(filterTools('지식·데이터', 'all')).toHaveLength(9);
   });
 
   it('모든 항목에 기능·활용·비용·주의·검증 수준과 HTTPS 출처가 있다', () => {
@@ -98,13 +98,13 @@ describe('AI 도구 가이드', () => {
 
   it('필터·검색·초기화를 반복해도 올바른 목록을 보여준다', () => {
     render(<ToolGuide />);
-    expect(screen.getByRole('status')).toHaveTextContent('51개 항목');
+    expect(screen.getByRole('status')).toHaveTextContent('54개 항목');
     fireEvent.click(screen.getByRole('button', { name: '기획·문서 5' }));
     expect(screen.getByRole('status')).toHaveTextContent('5개 항목');
     fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'humanizer' } });
     expect(screen.getByRole('status')).toHaveTextContent('1개 항목');
     expect(screen.getAllByRole('article')).toHaveLength(1);
-    fireEvent.click(screen.getByRole('button', { name: '개발 10' }));
+    fireEvent.click(screen.getByRole('button', { name: '개발 11' }));
     expect(screen.queryAllByRole('article')).toHaveLength(0);
     fireEvent.click(screen.getByRole('button', { name: '기획·문서 5' }));
     expect(screen.getAllByRole('article')).toHaveLength(1);
@@ -112,8 +112,8 @@ describe('AI 도구 가이드', () => {
     expect(screen.queryAllByRole('article')).toHaveLength(0);
     fireEvent.click(screen.getByRole('button', { name: '검색·분류 초기화' }));
     expect(screen.getByRole('searchbox')).toHaveValue('');
-    expect(screen.getAllByRole('article')).toHaveLength(51);
-    expect(screen.getByRole('button', { name: '전체 51' })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getAllByRole('article')).toHaveLength(54);
+    expect(screen.getByRole('button', { name: '전체 54' })).toHaveAttribute('aria-pressed', 'true');
   });
 
   it('빠른 비교 링크는 필터를 초기화해 대상 카드가 사라지지 않게 한다', () => {
@@ -184,6 +184,32 @@ describe('AI 도구 가이드', () => {
     render(<ToolGuide />);
     expect(screen.getAllByRole('link', { name: /상세 보기$/ })).toHaveLength(5);
     expect(screen.getByText('2026.11.12')).toBeInTheDocument();
+  });
+
+  it('보안·위치 도구 3개는 중복 없이 추가하고 허가 범위와 불확실성을 기본 노출한다', () => {
+    const ids = ['netryx-astra-v2', 'aimap-bishopfox', 'voidaccess'];
+    render(<ToolGuide />);
+    for (const id of ids) {
+      const entries = tools.filter((tool) => tool.id === id);
+      expect(entries).toHaveLength(1);
+      const tool = entries[0];
+      expect(tool.notice).toContain('허가');
+      expect(tool.evidence).toContain('미검증');
+      const row = screen.getByRole('heading', { name: tool.name }).closest('article')!;
+      expect(within(row).getByText(tool.notice!).closest('details')).toBeNull();
+    }
+    const netryx = tools.find((tool) => tool.id === 'netryx-astra-v2')!;
+    expect(netryx.links[0].url).toBe('https://github.com/sparkyniner/Netryx-Astra-V2-Geolocation-Tool');
+    expect(netryx.cost).toContain('CC BY-NC-SA 4.0');
+    expect(netryx.caution).toContain('실시간 위치 추적 도구가 아니며');
+    const aimap = tools.find((tool) => tool.id === 'aimap-bishopfox')!;
+    expect(aimap.caution).toContain('공인 보안등급이나 침해 확정 증거가 아닙니다');
+    expect(aimap.links[0].url).toBe('https://github.com/BishopFox/aimap');
+    const voidaccess = tools.find((tool) => tool.id === 'voidaccess')!;
+    expect(voidaccess.summary).toContain('유출을 확정할 수는 없습니다');
+    expect(voidaccess.caution).toContain('비밀번호·토큰·비공개 고객정보를 입력하지 마세요');
+    expect(filterTools('AIMap', 'development').map((tool) => tool.id)).toEqual(['aimap-bishopfox']);
+    expect(filterTools('VoidAccess', 'knowledge').map((tool) => tool.id)).toEqual(['voidaccess']);
   });
 
   it('출처는 새 탭임을 알리고 안전한 rel을 가지며 원래 사이트로 돌아갈 수 있다', () => {
