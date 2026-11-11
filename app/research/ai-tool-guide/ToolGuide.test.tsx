@@ -4,10 +4,10 @@ import { ToolGuide } from './ToolGuide';
 import { filterTools, GROUP_LABELS, GROUP_ORDER, originalTools, tools } from './catalog';
 
 describe('AI 도구 가이드', () => {
-  it('44개 카드 모두 기능·활용만 기본 표시하고 시작 방법은 제공하지 않는다', () => {
+  it('51개 카드 모두 기능·활용만 기본 표시하고 시작 방법은 제공하지 않는다', () => {
     render(<ToolGuide />);
     const cards = screen.getAllByRole('article');
-    expect(cards).toHaveLength(44);
+    expect(cards).toHaveLength(51);
     for (const card of cards) {
       expect(within(card).getByText('기능과 역할')).toBeInTheDocument();
       expect(within(card).getByText('우리 업무 활용')).toBeInTheDocument();
@@ -17,15 +17,15 @@ describe('AI 도구 가이드', () => {
     expect(filterTools('npx skills add', 'all')).toEqual([]);
   });
 
-  it('44개를 기능별 6개 카테고리로 중복 없이 분류하고 원래 자료를 보존한다', () => {
+  it('51개를 기능별 6개 카테고리로 중복 없이 분류하고 원래 자료를 보존한다', () => {
     expect(originalTools).toHaveLength(12);
-    expect(tools).toHaveLength(44);
-    expect(new Set(tools.map((tool) => tool.id)).size).toBe(44);
-    expect(GROUP_ORDER.map((group) => filterTools('', group).length)).toEqual([11, 10, 5, 6, 4, 8]);
+    expect(tools).toHaveLength(51);
+    expect(new Set(tools.map((tool) => tool.id)).size).toBe(51);
+    expect(GROUP_ORDER.map((group) => filterTools('', group).length)).toEqual([11, 10, 5, 6, 7, 12]);
     expect(tools.every((tool) => GROUP_ORDER.includes(tool.group))).toBe(true);
     expect(tools.flatMap((tool) => tool.links).some((link) => /github\.com\/ITCONNECT-ci-cd\//i.test(link.url))).toBe(false);
     const repositories = tools.filter((tool) => !originalTools.some((original) => original.id === tool.id));
-    expect(new Set(repositories.map((tool) => tool.links[0].url.toLowerCase().replace(/\/$/, ''))).size).toBe(32);
+    expect(new Set(repositories.map((tool) => tool.links[0].url.toLowerCase().replace(/\/$/, ''))).size).toBe(39);
     expect(tools.find((tool) => tool.id === 'corevisos-library')?.kind).toContain('웹사이트');
     for (const id of ['treg', 'code-animation-prompts', 'autorag', 'auto-ontology-mcp']) {
       expect(tools.find((tool) => tool.id === id)?.notice?.length).toBeGreaterThan(15);
@@ -59,7 +59,7 @@ describe('AI 도구 가이드', () => {
     expect(screen.getAllByRole('article')).toHaveLength(10);
     expect(screen.getByRole('button', { name: '개발 10' })).toHaveAttribute('aria-pressed', 'true');
     fireEvent.click(screen.getByRole('link', { name: '전체 도구 보기 ↓' }));
-    expect(screen.getAllByRole('article')).toHaveLength(44);
+    expect(screen.getAllByRole('article')).toHaveLength(51);
   });
 
   it('검색은 대소문자·앞뒤 공백을 무시하고 이름·용도·주의사항을 포함한다', () => {
@@ -67,7 +67,7 @@ describe('AI 도구 가이드', () => {
     expect(filterTools('한국어', 'all').map((tool) => tool.id)).toContain('humanizer');
     expect(filterTools('학생정보', 'all').map((tool) => tool.id)).toContain('design-md-chrome');
     expect(filterTools('Humanizer', 'design')).toEqual([]);
-    expect(filterTools('지식·데이터', 'all')).toHaveLength(4);
+    expect(filterTools('지식·데이터', 'all')).toHaveLength(7);
   });
 
   it('모든 항목에 기능·활용·비용·주의·검증 수준과 HTTPS 출처가 있다', () => {
@@ -98,7 +98,7 @@ describe('AI 도구 가이드', () => {
 
   it('필터·검색·초기화를 반복해도 올바른 목록을 보여준다', () => {
     render(<ToolGuide />);
-    expect(screen.getByRole('status')).toHaveTextContent('44개 항목');
+    expect(screen.getByRole('status')).toHaveTextContent('51개 항목');
     fireEvent.click(screen.getByRole('button', { name: '기획·문서 5' }));
     expect(screen.getByRole('status')).toHaveTextContent('5개 항목');
     fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'humanizer' } });
@@ -112,8 +112,8 @@ describe('AI 도구 가이드', () => {
     expect(screen.queryAllByRole('article')).toHaveLength(0);
     fireEvent.click(screen.getByRole('button', { name: '검색·분류 초기화' }));
     expect(screen.getByRole('searchbox')).toHaveValue('');
-    expect(screen.getAllByRole('article')).toHaveLength(44);
-    expect(screen.getByRole('button', { name: '전체 44' })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getAllByRole('article')).toHaveLength(51);
+    expect(screen.getByRole('button', { name: '전체 51' })).toHaveAttribute('aria-pressed', 'true');
   });
 
   it('빠른 비교 링크는 필터를 초기화해 대상 카드가 사라지지 않게 한다', () => {
@@ -156,6 +156,13 @@ describe('AI 도구 가이드', () => {
       'security-audit-skill': ['development', 'https://github.com/cloudflare/security-audit-skill'],
       ghidra: ['development', 'https://github.com/NationalSecurityAgency/ghidra'],
       unslop: ['design', 'https://github.com/heydamir/unslop'],
+      'google-maps-scraper': ['knowledge', 'https://github.com/gosom/google-maps-scraper'],
+      'remote-in-tech': ['knowledge', 'https://github.com/remoteintech/remote-jobs'],
+      huginn: ['automation', 'https://github.com/huginn/huginn'],
+      firecrawl: ['knowledge', 'https://github.com/firecrawl/firecrawl'],
+      'check-if-email-exists': ['automation', 'https://github.com/reacherhq/check-if-email-exists'],
+      listmonk: ['automation', 'https://github.com/knadh/listmonk'],
+      twenty: ['automation', 'https://github.com/twentyhq/twenty'],
     } as const;
     for (const [id, [group, url]] of Object.entries(added)) {
       const matches = tools.filter((tool) => tool.id === id);
