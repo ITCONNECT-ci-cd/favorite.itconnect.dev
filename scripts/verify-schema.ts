@@ -554,9 +554,8 @@ function checkCleanupApplied(service: SupabaseClient): Promise<Outcome> {
 /**
  * ⑪ 0006 대표 계약 — service_role에만 열린 versioned normalizer의 결과와 anon EXECUTE 회수를 함께 본다.
  *
- * role membership, effective privilege whitelist, private schema와 pg_cron job처럼 Data API로 안전하게
- * 읽을 수 없는 catalog 계약은 `scripts/verify-discord-ingest.ts --preflight`가 담당한다. 이 검사는 그
- * verifier를 대체하지 않고, 일상적인 배포 확인에서 0006 자체가 통째로 빠진 상태를 즉시 잡는다.
+ * 일상적인 배포 확인에서 0006 자체가 통째로 빠진 상태를 즉시 잡는다.
+ * (Discord ingest 경로는 2026-11-16 폐기 — agent.itconnect.dev로 통합)
  */
 async function checkDiscordIngestApplied(
   anon: SupabaseClient,
@@ -622,7 +621,7 @@ async function main(): Promise<void> {
   ];
 
   console.log('스키마·설정 검증 — 0001 결과(①~⑥, ④는 0005 로 상한 해제), Auth 설정(⑦), 마이그레이션 0002·0003·0004·0006 적용(⑧⑨⑩⑪)을 확인합니다.');
-  console.log('적용 절차: 0002~0006 을 적용한 뒤 이 스크립트로 11종을 통과시키고, verify-discord-ingest --preflight 로 ACL·Cron catalog를 확인합니다.');
+  console.log('적용 절차: 0002~0006 을 적용한 뒤 이 스크립트로 11종을 통과시킵니다.');
   console.log(`대상: ${url}`);
   console.log('');
 
@@ -654,7 +653,7 @@ async function main(): Promise<void> {
   }
 
   console.log(
-    `${checks.length}종 전부 통과 — B2 완료 기준과 배포 전 설정 요건(signup·0002·0003·0004·0005·0006 대표 계약)을 만족합니다. ACL·Cron 전체 계약은 verify-discord-ingest --preflight 결과를 함께 보세요.`,
+    `${checks.length}종 전부 통과 — B2 완료 기준과 배포 전 설정 요건(signup·0002·0003·0004·0005·0006 대표 계약)을 만족합니다.`,
   );
 }
 

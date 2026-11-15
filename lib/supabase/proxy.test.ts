@@ -141,28 +141,7 @@ describe('루트 proxy.ts (Next 16 파일 컨벤션)', () => {
     expect(matcher).toContain('_next/image');
   });
 
-  it('Discord ingest 경로는 matcher 단계에서 완전히 제외해 getUser 를 호출하지 않는다', async () => {
-    // Next 16.3 bundled 문서는 `unstable_doesProxyMatch`라고 쓰지만 실제 package export는 여전히
-    // `unstable_doesMiddlewareMatch`다. 프레임워크의 matcher compiler로 실제 배포 판정을 검증한다.
-    const { getUser } = stubClient();
-    const url = 'https://example.com/api/discord-ingest';
-    const matched = unstable_doesMiddlewareMatch({ config, url });
-
-    // 실제 Next dispatcher처럼 match일 때만 proxy를 부른다. HMAC가 틀린 요청도 이 단계에서는 body를
-    // 읽지 않으므로, false이면 Supabase Auth outbound가 서명 검사 앞에 끼어들 수 없다.
-    if (matched) await proxy(new NextRequest(url));
-
-    expect(matched).toBe(false);
-    expect(getUser).not.toHaveBeenCalled();
-  });
-
-  it('Discord ingest 하위 path/trailing slash도 제외하지만 다른 API는 그대로 session 갱신 대상이다', () => {
-    expect(
-      unstable_doesMiddlewareMatch({ config, url: 'https://example.com/api/discord-ingest/' }),
-    ).toBe(false);
-    expect(
-      unstable_doesMiddlewareMatch({ config, url: 'https://example.com/api/discord-ingest/extra' }),
-    ).toBe(false);
+  it('다른 API 경로는 그대로 session 갱신 대상이다', () => {
     expect(
       unstable_doesMiddlewareMatch({ config, url: 'https://example.com/api/ai-search' }),
     ).toBe(true);
@@ -190,8 +169,6 @@ describe('루트 proxy.ts (Next 16 파일 컨벤션)', () => {
     expect(pattern.test('/category/abc')).toBe(true);
     expect(pattern.test('/api/ai-search')).toBe(true);
 
-    expect(pattern.test('/api/discord-ingest')).toBe(false);
-    expect(pattern.test('/api/discord-ingest/')).toBe(false);
     expect(pattern.test('/research/wanted-ai-championship-2026')).toBe(false);
     expect(pattern.test('/_next/static/chunk.js')).toBe(false);
     expect(pattern.test('/_next/image')).toBe(false);

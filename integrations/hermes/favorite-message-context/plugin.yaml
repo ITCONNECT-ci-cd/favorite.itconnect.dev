@@ -1,3 +1,0 @@
-name: favorite-message-context
-version: "1.4.0"
-description: Preserve each Favorite Discord message in a durable FIFO and enforce its gateway-bound snowflake.
