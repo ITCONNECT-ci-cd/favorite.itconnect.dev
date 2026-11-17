@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 import { createClient, type SupabaseClient, type User } from '@supabase/supabase-js';
 
-import { ADMIN_EMAIL } from '@/lib/admin-config';
+import { getAdminEmail } from '@/lib/admin-config';
 import { createServiceRoleClient } from '@/scripts/lib/service-client';
 
 /**
@@ -198,6 +198,8 @@ async function verifySignIn(url: string, anonKey: string, email: string, passwor
 
 async function main(): Promise<void> {
   loadEnvLocal();
+  const ADMIN_EMAIL = getAdminEmail();
+  if (ADMIN_EMAIL === '') throw new Error('환경변수 ADMIN_EMAIL 이 비어 있습니다. .env.local 에 관리자 이메일을 넣으세요.');
   const { url, anonKey } = resolveEnv();
   const service = createServiceRoleClient();
 

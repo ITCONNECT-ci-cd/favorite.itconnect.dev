@@ -4,7 +4,7 @@ import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 import { cache } from 'react';
 
-import { ADMIN_EMAIL } from '@/lib/admin-config';
+import { getAdminEmail } from '@/lib/admin-config';
 
 import { requireEnv } from './env';
 
@@ -165,7 +165,9 @@ async function readAdminSession(signal?: AbortSignal): Promise<AdminSession | nu
   // `typeof` 로 보는 이유: 타입상 `string | undefined` 지만 실제 응답에서 `null` 이 오는
   // 계정도 있다(전화번호·OAuth 로만 만든 계정). 어느 쪽이든 관리자가 아니다.
   const email: unknown = data.user.email;
-  if (typeof email !== 'string' || email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) return null;
+  const adminEmail = getAdminEmail();
+  if (adminEmail === '') return null; // ADMIN_EMAIL 미설정 → 관리자 없음(fail-closed)
+  if (typeof email !== 'string' || email.toLowerCase() !== adminEmail) return null;
 
   return { userId: data.user.id, email };
 }

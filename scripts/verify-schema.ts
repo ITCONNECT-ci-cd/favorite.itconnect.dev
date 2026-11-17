@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 
 import { createClient, type PostgrestError, type SupabaseClient } from '@supabase/supabase-js';
 
-import { ADMIN_EMAIL } from '@/lib/admin-config';
+import { getAdminEmail } from '@/lib/admin-config';
 import { createServiceRoleClient } from '@/scripts/lib/service-client';
 
 /**
@@ -398,7 +398,7 @@ function isAdminPredicate(predicate: string | null): boolean {
   if (typeof predicate !== 'string') return false;
 
   const flat = predicate.toLowerCase();
-  return flat.includes('auth.jwt()') && flat.includes(`'${ADMIN_EMAIL.toLowerCase()}'`);
+  return flat.includes('auth.jwt()') && getAdminEmail() !== '' && flat.includes(`'${getAdminEmail()}'`);
 }
 
 /** 함수 자체가 없다 = 0002 를 실행하지 않았다. PostgREST 는 스키마 캐시 조회 실패로 알린다. */

@@ -18,5 +18,21 @@
  * 모듈을 import 한다. `server-only` 를 붙이면 그 순간 스크립트가 import 만으로 throw 한다
  * (`lib/supabase/admin.ts` 주석 참조). 여기 든 것은 비밀이 아니라 **공개 상수**다 —
  * 브라우저 번들에 실려도 아무 권한도 주지 않는다. 권한을 정하는 것은 세션과 RLS다.
+ *
+ * ## t1843 (2026-11-17): 값은 환경변수 `ADMIN_EMAIL` 로 옮겼다
+ *
+ * 공개 저장소에 관리자 계정 이메일을 평문으로 두지 않으려고 코드에서 뺐다. 배포(Vercel)
+ * Production/Preview 와 `.env.local` 에 `ADMIN_EMAIL` 을 등록해야 한다. **비어 있으면
+ * 아무도 관리자가 아니다(fail-closed)** — 게이트는 `null`, 스크립트는 실행 전에 멈춘다.
+ * SQL 마이그레이션(RLS)에는 여전히 같은 값이 리터럴로 있어야 한다(SQL 은 env 를 못 읽음).
  */
-export const ADMIN_EMAIL = 'contact@itconnect.dev';
+/** 관리자 이메일(소문자). 환경변수가 없거나 비면 빈 문자열 — 호출부는 빈 값을 "관리자 없음"으로 다룬다. */
+export function getAdminEmail(env: Record<string, string | undefined> = process.env): string {
+  return (env.ADMIN_EMAIL ?? '').trim().toLowerCase();
+}
+
+/**
+ * 모듈 로드 시점 값(테스트·기존 import 호환용). 런타임 판정은 `getAdminEmail()` 을 쓴다 —
+ * 스크립트는 `.env.local` 을 import 뒤에 읽기 때문이다.
+ */
+export const ADMIN_EMAIL = getAdminEmail();

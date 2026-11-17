@@ -1,6 +1,14 @@
+import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vitest/config';
+
+// t1843: 관리자 이메일은 코드에 두지 않는다. 테스트는 RLS 마이그레이션(DB 쪽 단일 출처)의
+// 리터럴을 읽어 ADMIN_EMAIL 로 넣는다 — 코드(env)와 SQL 이 같아야 한다는 계약도 그대로 시험된다.
+const adminEmailFromSql =
+  /auth\.jwt\(\) ->> 'email'\)\) = '([^'\s]+@[^'\s]+)'/.exec(
+    readFileSync(new URL('./supabase/migrations/0002_admin_write_policy.sql', import.meta.url), 'utf8'),
+  )?.[1] ?? '';
 
 export default defineConfig({
   plugins: [react()],
@@ -17,6 +25,7 @@ export default defineConfig({
   },
   test: {
     environment: 'jsdom',
+    env: { ADMIN_EMAIL: process.env.ADMIN_EMAIL ?? adminEmailFromSql },
     setupFiles: ['./vitest.setup.ts'],
     include: ['**/*.test.{ts,tsx}'],
     exclude: ['**/node_modules/**', '.next/**', 'docs/**'],
